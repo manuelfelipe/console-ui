@@ -1,0 +1,25 @@
+<div class="p-3">
+
+  Those are the configs that will be injected into your service with the TheCloud Middleware.
+  If you recently modified them, remember to restart the pods to have the latest ones used.
+
+  <hr/>
+
+  <pre *ngIf="configMaps" [innerHtml]="configMaps | prettyjson:2"></pre>
+
+  <small class="text-muted" *ngIf="!configMaps">
+    No configs yet... Go to <code>Manage > Config Management</code> to add
+  </small>
+
+  <hr/>
+
+  <div class="text-right">
+    <a class="btn btn-outline-primary"
+       *ngIf="configMaps"
+       [href]="configMapsHref"
+       download="configmaps_{{cluster}}_{{namespace}}_{{today | date:'short'}}.json">
+      {{'ACTIONS.DOWNLOAD' | translate}}
+    </a>
+  </div>
+
+</div>

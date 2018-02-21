@@ -1,0 +1,26 @@
+<app-api-details [namespace]="namespace"></app-api-details>
+
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div class="card" *ngFor="let enabledPlugin of enabledPlugins; trackBy: enabledPlugin">
+  <div class="card-header cursor-hover" [class.card-collapsed]="!isCollapsed[enabledPlugin]" (click)="isCollapsed[enabledPlugin] = !isCollapsed[enabledPlugin]">
+    <span class="text-inverse"
+          [ngClass]="{ 'icon-arrows-down': !isCollapsed[enabledPlugin], 'icon-arrows-up': isCollapsed[enabledPlugin] }"></span>
+    {{enabledPlugin | startCase}}
+
+    <span class="badge badge-default badge-pill float-right" [class.badge-success]="plugins[enabledPlugin]?.enabled">
+      <span *ngIf="plugins[enabledPlugin]?.enabled">enabled</span>
+      <span *ngIf="!plugins[enabledPlugin]?.enabled">disabled</span>
+    </span>
+  </div>
+
+  <div id="collapse_{{enabledPlugin}}" [ngbCollapse]="!isCollapsed[enabledPlugin]">
+    <div *ngIf="isCollapsed[enabledPlugin]" class="px-4 py-3">
+      <app-plugin-config-form
+        [plugin]="plugins[enabledPlugin]"
+        [enabledPlugin]="enabledPlugin"
+        [namespace]="namespace"
+        (pluginModified)="pluginModified($event)"></app-plugin-config-form>
+    </div>
+  </div>
+</div>

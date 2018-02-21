@@ -1,0 +1,80 @@
+<div *ngIf="isCurrentBeaverUser()">
+  <app-project-selection-form class="w-100"
+                              (formChanged)="formGroup?.setControl('project', $event)"></app-project-selection-form>
+
+  <hr/>
+
+  <app-provision-app-form class="w-100"
+                          (formChanged)="formGroup?.setControl('app', $event)"></app-provision-app-form>
+
+  <hr/>
+
+  <app-provision-db-form class="w-100"
+                         *ngIf="formGroup?.value?.app?.type === 'API'"
+                         (formChanged)="formGroup?.setControl('db', $event)"></app-provision-db-form>
+
+  <!-- we do not show dns here... it will be elsewhere, later -->
+  <!--<app-provision-dns-form class="w-100"-->
+                          <!--(formChanged)="formGroup?.setControl('dns', $event)"></app-provision-dns-form>-->
+
+   <!-- {{'isValid(' + formGroup?.valid + ')'}} - {{formGroup?.value | json}} -->
+
+  <button class="btn btn-block btn-outline-success col-md-3 mt-3" (click)="onSubmit()" [disabled]="!formGroup?.valid">
+    <span class="icon-arrows-plus">Initialize New Project</span>
+  </button>
+</div>
+
+<!-- Modal upon successful initialization -->
+<ng-template #successModal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <ngb-alert type="success" [dismissible]="false" class="text-center"><strong>Congratulations!</strong> Your Project
+      has been Successfully Initialized!
+    </ngb-alert>
+
+    <strong>What happens next?</strong>
+
+    <br/>
+
+    <ul class="list-unstyled">
+      <li class="mb-3">
+        <span class="icon-arrows-circle-check text-success"></span>
+        Your repository has been activated in Drone. On your next code push, a new build will get triggered. You will be able to follow your first build logs
+        <a target="_blank"
+           [href]="'/analyze/builds/' + formGroup?.value?.project?.owner + '/' + formGroup?.value?.project?.repo + '/1'">here</a>
+      </li>
+      <li class="mb-3">
+        <span class="icon-arrows-circle-check text-success"></span>
+        If you have checked the <code>Enable Config Management</code> box,
+        you will be able to do so in the <code class="text-nowrap">Manage > Config Management</code> tab.
+      </li>
+      <li class="mb-3">
+        <span class="icon-arrows-circle-check text-success"></span>
+        If you have selected a database, it will be provisioned upon your next build, within Drone.
+        <small>
+          <br/>
+          - Your first build to <code>develop</code> branch will provision your <code>Dev</code> database
+          <br/>
+          - Your first build to <code>release/*</code> branch will provision your <code>QA</code> database
+          <br/>
+          - Your first build to <code>master</code> branch will provision your <code>Prod</code> database
+        </small>
+
+        <br/><br/>
+
+        You will be able to use the credentials in your code via the environment variable <code>process.env.SECRETS_SELFSERVICE</code>.
+      </li>
+      <li class="mb-3">
+        <span class="icon-arrows-circle-check text-success"></span>
+        If you have selected custom DNSs, they will be provisioned upon your next build, within Drone.
+      </li>
+    </ul>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<div *ngIf="!isCurrentBeaverUser()">
+  <img class="mx-auto d-block" src="../../../../../assets/images/coming-soon.png" alt="Coming Soon" width="300"/>
+</div>

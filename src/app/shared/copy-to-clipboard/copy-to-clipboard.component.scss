@@ -1,0 +1,14 @@
+@import '../../../assets/styles/variables';
+
+.btn {
+  opacity: 0.8;
+  background-color: $YP_LIGHT;
+  border-color: $YP_LIGHT;
+  border-radius: 4px;
+
+  &:hover {
+    opacity: 1;
+    background-color: $YP_LIGHT;
+    border-color: $YP_LIGHT;
+  }
+}

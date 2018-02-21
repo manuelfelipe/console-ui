@@ -1,0 +1,77 @@
+<div class="card h-100 box-shadow card-status-{{BuildStatus[build?.status] | buildStatusToClass}}">
+  <div class="card-block">
+
+    <div class="card-title">
+      <img src="../../../../../../assets/images/widgets/drone.svg" alt="Drone.io" height="25" class="mr-1"/>
+      {{'WIDGETS_TITLE.LATEST_BUILD' | translate}}
+    </div>
+
+    <app-loading [isLoading]="isLoading"></app-loading>
+
+    <div>
+      <span class="badge badge-{{BuildStatus[build?.status] | buildStatusToClass}}">
+        #{{build?.number}} {{BuildStatus[build?.status]}}
+      </span>
+    </div>
+
+    <div class="card-text card-text-content" *ngIf="build">
+      <ul class="list-unstyled">
+        <!-- author build action -->
+        <li class="text-nowrap">
+          <span class="text-primary">{{build?.author}}</span>
+          <span>
+            <span class="icon-arrows-slim-right"></span>
+            {{BuildEvent[build?.event]}}
+            <span class="icon-arrows-slim-right"></span>
+          </span>
+          <span class="text-primary">{{build?.branch}}</span>
+        </li>
+
+        <!-- build details (creation time and duration) -->
+        <li class="build-time text-muted mb-3">
+          <small>
+            <span class="build-time-timeAgo icon-basic-clock"> {{build?.createdAt | amTimeAgo}}</span>
+            <span class="build-time-date icon-basic-calendar"> {{build?.createdAt | date:'MMM dd, yy HH:mm'}}</span>
+          </small>
+
+          <!-- show duration only if build was finished (success or failure) -->
+          <small *ngIf="build?.status === BuildStatus.success || build?.status === BuildStatus.failure">
+            <span class="icon-basic-clessidre"></span> {{(build?.finishedAt - build?.createdAt) |
+            amDuration:'milliseconds'}}
+          </small>
+        </li>
+
+        <!-- repo link -->
+        <li>
+          <fa [name]="'bitbucket'" [fw]="true" class="bitbucket"></fa>
+          <a href="https://git.thecloud.com/projects/{{project?.repository?.owner}}/repos/{{project?.repository?.name}}"
+             target="_blank">
+            {{project?.repository?.owner + ' / ' + project?.repository?.name}}
+          </a>
+        </li>
+
+        <!-- build branch -->
+        <li>
+          <fa [name]="'code-fork'" [fw]="true" class="bitbucket"></fa>
+          {{build?.branch}}
+        </li>
+
+        <!-- build message -->
+        <li>
+          <fa [name]="'commenting-o'" [fw]="true" class="bitbucket"></fa>
+          <a href="{{build?.linkUrl}}" target="_blank">{{build?.message | truncate: 100}}</a>
+        </li>
+
+        <!-- build logs -->
+        <li>
+          <fa [name]="'align-left'" [fw]="true" class="bitbucket"></fa>
+          <a target="_blank"
+             [routerLink]="['/analyze', 'builds', project?.repository?.owner, project?.repository?.name, build?.number]">
+            {{'ACTIONS.VIEW_LOGS' | translate}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

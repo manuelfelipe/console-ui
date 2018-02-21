@@ -1,0 +1,58 @@
+<form *ngIf="formGroup" [formGroup]="formGroup">
+  <!-- schema description -->
+  <div *ngIf="schema?.description" [innerHTML]="schema?.description" class="mb-4"></div>
+
+  <hr/>
+
+  <div class="row mb-4" *ngFor="let control of formGroup?.controls | objectToArray;">
+    <div class="col-12">
+      <span>
+        <label for="{{control.key}}" class="mb-0">
+          {{control.key | startCase}}
+          <span class="text-danger" *ngIf="schema?.fields[control.key].required">*</span>
+          <small class="text-muted">({{SchemaFieldType[schema.fields[control.key].type]}})</small>
+        </label>
+      </span>
+    </div>
+
+    <div class="col-md-3">
+      <input *ngIf="schema.fields[control.key].type !== SchemaFieldType.boolean"
+             id="{{control.key}}"
+             class="form-control"
+             [(ngModel)]="formGroup?.controls[control.key].value"
+             [formControlName]="control.key"/>
+
+      <app-field-boolean *ngIf="schema.fields[control.key].type === SchemaFieldType.boolean"
+                         [(ngModel)]="formGroup?.controls[control.key].value"
+                         [formControlName]="control.key">
+      </app-field-boolean>
+    </div>
+
+    <div class="col-md-9 align-items-center d-inline-flex">
+      <div>
+        <small [innerHTML]="schema?.fields[control.key].description"></small>
+        <small *ngIf="schema?.fields[control.key].default">
+          Defaults to<code>{{schema?.fields[control.key].default}}</code>.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col-md-6">
+      <small><span class="text-danger">*</span> = {{'ACTIONS.REQUIRED_FIELD' | translate | lowercase}}</small>
+    </div>
+    <div class="col-md-6 text-md-right">
+      <button class="btn btn-outline-danger" *ngIf="plugin?.enabled" (click)="disable()">
+        {{'ACTIONS.DISABLE' | translate}}
+      </button>
+
+      <button class="btn btn-outline-primary" [disabled]="!formGroup.valid" (click)="onSubmit()">
+        <span *ngIf="!plugin?.enabled">{{'ACTIONS.ENABLE' | translate}}</span>
+        <span *ngIf="plugin?.enabled">{{'ACTIONS.UPDATE' | translate}}</span>
+      </button>
+    </div>
+  </div>
+</form>

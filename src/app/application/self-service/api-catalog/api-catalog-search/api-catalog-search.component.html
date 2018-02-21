@@ -1,0 +1,52 @@
+<form class="form-group" [formGroup]="formGroup" novalidate>
+  <div class="btn-group w-100">
+
+    <div ngbDropdown>
+      <!-- dev|qa|prod dropdown -->
+      <button class="btn btn-secondary" ngbDropdownToggle>
+        <span *ngIf="formGroup?.value?.environment"><small class="text-muted">env: </small>{{formGroup?.value?.environment}}</span>
+        <span *ngIf="!formGroup?.value?.environment">'-- select env --'</span>
+      </button>
+
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button class="btn dropdown-item" (click)="formGroup?.get('environment')?.patchValue('dev')">Dev</button>
+        <button class="btn dropdown-item" (click)="formGroup?.get('environment')?.patchValue('qa')">QA</button>
+        <button class="btn dropdown-item" (click)="formGroup?.get('environment')?.patchValue('prod')">Prod</button>
+      </div>
+    </div>
+
+    <!-- serviceGroup (thecloud, cloud, etc) -->
+    <div ngbDropdown>
+      <button class="btn btn-secondary" ngbDropdownToggle>
+        <!-- if a specific group -->
+        <span *ngIf="formGroup?.value?.serviceGroup">
+          <small class="text-muted">group: </small>{{formGroup?.value?.serviceGroup}}
+        </span>
+
+        <!-- if ALL groups -->
+        <small *ngIf="!formGroup?.value?.serviceGroup" class="text-muted">All Groups</small>
+      </button>
+
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button class="btn dropdown-item" (click)="formGroup?.get('serviceGroup')?.patchValue(null)">
+          ALL
+          <small class="text-muted pull-right">({{serviceGroups?.total}})</small>
+        </button>
+
+        <div class="dropdown-divider"></div>
+
+        <button class="btn dropdown-item"
+                *ngFor="let serviceGroup of serviceGroups?.serviceGroups"
+                (click)="formGroup?.get('serviceGroup')?.patchValue(serviceGroup.key)">
+          {{serviceGroup.key | uppercase}}
+          <small class="text-muted pull-right">({{serviceGroup.doc_count}})</small>
+        </button>
+      </div>
+    </div>
+
+    <!-- searchTerms, comma delimited-->
+    <input class="form-control"
+           formControlName="searchTerms"
+           placeholder="comma delimited search terms, e.g: 'myNamespace, aSwaggerField'"/>
+  </div>
+</form>

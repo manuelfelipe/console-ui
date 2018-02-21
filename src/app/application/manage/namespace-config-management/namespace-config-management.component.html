@@ -1,0 +1,40 @@
+<div class="row mb-4">
+  <div class="col-12">
+    <span [innerHtml]="'MANAGE.CONFIG_MANAGEMENT_DESCRIPTION' | translate"></span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <app-namespace-config-management-breadcrumb
+      [selectedKey]="selectedKey"
+      (keyNavClickedEmitter)="onKeyClick($event)">
+    </app-namespace-config-management-breadcrumb>
+  </div>
+</div>
+<div class="row">
+  <!-- Keys -->
+  <div class="col-md-4">
+    <div *ngIf="!selectedKey || isFolderUtil(selectedKey)">
+      <app-loading [isLoading]="isLoading"></app-loading>
+
+      <div *ngFor="let key of keys;" class="mb-3">
+        <button *ngIf="key && key !== selectedKey"
+                [class.btn-outline-info]="isFolderUtil(key)"
+                [class.btn-environment]="environments.includes(formatKey(key))"
+                (click)="onKeyClick(key)"
+                class="btn btn-secondary btn-block text-left">
+          {{formatKey(key)}}
+          <span *ngIf="isFolderUtil(key)" class="icon-arrows-right float-right"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="col-md-8">
+    <app-namespace-config-management-value
+      [selectedKey]="selectedKey"
+      (updateKeysEmitter)="onKeyClick($event)">
+    </app-namespace-config-management-value>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+:host /deep/ .swagger-ui {
+  // hide Swagger's information section, kinda useless
+  .information-container {
+    // uncomment to hide info section
+    // display: none !important;
+  }
+
+  // instead of 100%, which makes it fugly
+  .col {
+    width: auto !important;
+  }
+}

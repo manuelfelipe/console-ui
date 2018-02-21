@@ -1,0 +1,10 @@
+<div *ngFor="let alert of alerts; let i = index;">
+
+  <ngb-alert *ngIf="!isAlertDismissed[i]"
+             (close)="isAlertDismissed[i] = true"
+             [type]="getType(alert.type)"
+             [dismissible]="true">
+    {{alert.message}}
+  </ngb-alert>
+
+</div>

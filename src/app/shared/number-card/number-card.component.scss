@@ -1,0 +1,54 @@
+@import '../../../assets/styles/variables';
+
+.metric-value {
+  border: 1px solid;
+  color: #888888;
+  font-weight: 100;
+}
+
+.metric-label {
+  color: #888888;
+  font-size: 12px;
+}
+
+.size-sm {
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+}
+
+.size-lg {
+  height: 75px;
+  width: 75px;
+  line-height: 75px;
+}
+
+.type-default {
+  background-color: #888888;
+  border: 1px solid #888888;
+  color: #888888;
+}
+
+.type-success {
+  background-color: $YP_GREEN;
+  border: 1px solid $YP_GREEN;
+  color: $YP_GREEN;
+}
+
+.type-info {
+  background-color: $YP_BLUE;
+  border: 1px solid $YP_BLUE;
+  color: $YP_BLUE;
+}
+
+.type-warning {
+  background-color: $YP_ORANGE;
+  border: 1px solid $YP_ORANGE;
+  color: $YP_ORANGE;
+}
+
+.type-danger {
+  background-color: $YP_RED;
+  border: 1px solid $YP_RED;
+  color: $YP_RED;
+}

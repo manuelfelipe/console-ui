@@ -1,0 +1,58 @@
+@import '../../../../assets/styles/variables';
+
+:host /deep/ ngb-typeahead-window {
+  left: auto !important;
+  right: 0 !important;
+
+  &.dropdown-menu {
+    padding: 0;
+
+    .dropdown-item {
+      border-bottom: 1px solid $YP_BORDER;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.search-input {
+  padding-right: 50px;
+  font-weight: 100;
+  background: url('../../../../assets/images/widgets/magnifier.svg') right 5px center no-repeat;
+  background-size: 25px;
+  transition: all 200ms;
+
+  &:hover,
+  &:focus {
+    background-size: 50px;
+    border-color: $brand-info;
+  }
+}
+
+.modal-button {
+  border-color: $YP_BORDER;
+  transition: all 200ms;
+
+  &:hover,
+  &:active {
+    border-color: $brand-info !important;
+    color: $brand-info;
+  }
+}
+
+.btn-secondary:hover:enabled,
+.btn-secondary:active,
+.btn-secondary.active,
+.show > .btn-secondary.dropdown-toggle {
+  color: $YP_BLUE;
+  background-color: white;
+  border-color: $YP_BLUE;
+}
+
+.project-name {
+  font-size: 10px;
+  color: $YP_BORDER;
+  margin-top: -5px;
+}

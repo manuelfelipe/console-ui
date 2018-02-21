@@ -1,0 +1,46 @@
+<div class="input-group">
+
+  <!-- project selection -->
+  <input [focusFirst]="true"
+         [ngbTypeahead]="searchNamespaces"
+         [inputFormatter]="projectFormatter"
+         [resultTemplate]="projectTemplate"
+         (selectItem)="selectProject($event)"
+         onClick="this.select()"
+         placeholder="{{'KUBERNETES.SEARCH_PROJECTS' | translate}}"
+         id="search-input"
+         class="form-control search-input ml-auto hidden-sm-down">
+
+  <button class="btn btn-secondary modal-button ml-auto ml-md-1" (click)="openProjectsModal(projectsModal)">
+    <span class="icon-arrows-hamburger-2"></span>
+  </button>
+
+  <ng-template #projectTemplate let-r="result" let-t="term">
+    <div class="d-flex flex-row">
+      <span class="mr-auto" [innerHTML]="r?.name | highlight:t"></span>
+      <img *ngFor="let cluster of r?.clusters"
+           height="15"
+           class="my-auto ml-2"
+           src="../../../../assets/images/environments/{{cluster}}.png"/>
+    </div>
+    <div class="d-flex flex-row">
+      <small class="project-name">
+        <span [innerHTML]="r?.project?.name | highlight:t"></span>
+      </small>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Projects modal -->
+<ng-template #projectsModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Select project</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-projects (namespaceSelected)="namespaceSelected($event)"></app-projects>
+  </div>
+</ng-template>

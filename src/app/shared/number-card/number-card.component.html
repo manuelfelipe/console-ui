@@ -1,0 +1,17 @@
+<div class="text-center">
+  <div class="metric-value mx-auto rounded-circle size-{{size}} type-{{type}}"
+       [style.color]="outline || color ? color : '#fff'"
+       [style.border-color]="color"
+       [style.background-color]="outline ? 'transparent' : color">
+    <div class="text-center metric"
+         counto
+         [step]="1"
+         [countTo]="value"
+         [countFrom]="0"
+         [duration]="0.1"
+         (countoChange)="counto = $event">
+      {{counto | number:format | na:('NA' | translate)}}<small *ngIf="unit && counto >= 0" style="font-size: 60%">{{unit}}</small>
+    </div>
+  </div>
+  <span class="metric-label" *ngIf="label">{{label}}</span>
+</div>

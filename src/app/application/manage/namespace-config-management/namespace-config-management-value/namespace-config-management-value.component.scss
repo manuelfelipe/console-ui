@@ -1,0 +1,25 @@
+@import '../../../../../assets/styles/variables';
+
+$BORDER_COLOR: rgba(0, 0, 0, 0.15);
+
+.config-wrapper {
+  padding-left: 30px;
+  border-left: 1px solid $YP_BORDER;
+}
+
+:host /deep/ .ace_editor.ace-clouds {
+  border: 1px solid $BORDER_COLOR;
+
+  .ace_print-margin {
+    width: 0;
+  }
+
+  .ace_gutter {
+    background: #eceeef;
+    border-right: 1px solid $BORDER_COLOR;
+  }
+
+  .ace_gutter-active-line {
+    background-color: $BORDER_COLOR;
+  }
+}

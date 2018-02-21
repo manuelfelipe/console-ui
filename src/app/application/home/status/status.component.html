@@ -1,0 +1,19 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<ngb-alert [dismissible]="false" [type]="uptimeSeverity" *ngIf="infras.length > 0">
+  <strong>{{(uptimeSeverity === 'success') ? 'All Systems Operational' : 'System Outage'}}</strong>
+
+  <span class="icon-status icon-arrows-circle-check" *ngIf="uptimeSeverity === 'success'"></span>
+  <span class="icon-status icon-arrows-circle-remove" *ngIf="uptimeSeverity !== 'success'"></span>
+</ngb-alert>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let infra of infras;">
+    {{infra.description}}
+
+    <!-- 0 = operational, 1 = failure -->
+    <small class="ml-auto px-2" [ngClass]="infra.status_public ? 'infra-danger': 'infra-success'">
+      {{infra.status_public ? 'FAILURE' : 'OPERATIONAL'}}
+    </small>
+  </li>
+</ul>

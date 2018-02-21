@@ -1,0 +1,81 @@
+<section class="bg-inverse h-100">
+
+  <table class="table table-sm table-responsive table-events bg-inverse text-white text-nowrap h-100 mb-0">
+    <thead>
+    <tr>
+      <th>
+        {{'EVENT.TYPE' | translate}}
+        <div class="d-inline-block">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-xs btn-link" ngbDropdownToggle>
+              {{(EventType[eventFilters.type]) || ('EVENT.SELECT_TYPE' | translate | lowercase)}}
+            </button>
+
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button class="dropdown-item"
+                      (click)="eventFilters.type = null"> - {{'EVENT.SELECT_TYPE' | translate | lowercase}} -
+              </button>
+              <button class="dropdown-item"
+                      *ngFor="let type of types;"
+                      (click)="eventFilters.type = type">{{EventType[type]}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </th>
+      <th>{{'EVENT.LAST_SEEN' | translate}}</th>
+      <th>{{'EVENT.FIRST_SEEN' | translate}}</th>
+      <th>{{'EVENT.COUNT' | translate}}</th>
+      <th>
+        {{'EVENT.REASON' | translate}}
+        <div class="d-inline-block">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-xs btn-link" ngbDropdownToggle>
+              {{(eventFilters.reason) || ('EVENT.SELECT_REASON' | translate | lowercase)}}
+            </button>
+
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button class="dropdown-item"
+                      (click)="eventFilters.reason = null"> - {{'EVENT.SELECT_REASON' | translate | lowercase}} -
+              </button>
+              <button class="dropdown-item"
+                      *ngFor="let reason of reasons;"
+                      (click)="eventFilters.reason = reason">{{reason}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </th>
+      <th>{{'EVENT.MESSAGE' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let event of events | filterBy: eventFilters;">
+      <!-- Type -->
+      <td><span class="badge badge-{{getEventTypeClass(event)}}">{{EventType[event.type] | uppercase}}</span></td>
+
+      <!-- Last Seen -->
+      <td>
+        <span *ngIf="event.lastTimestamp">{{event.lastTimestamp | amTimeAgo:true}}</span>
+        <span *ngIf="!event.lastTimestamp">--</span>
+      </td>
+
+      <!-- First Seen -->
+      <td>
+        <span *ngIf="event.firstTimestamp">{{event.firstTimestamp | amTimeAgo:true}}</span>
+        <span *ngIf="!event.firstTimestamp">--</span>
+      </td>
+
+      <!-- Count -->
+      <td>{{event.count}}</td>
+
+      <!-- Reason -->
+      <td>{{event.reason}}</td>
+
+      <!-- Message -->
+      <td>{{event.message}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>

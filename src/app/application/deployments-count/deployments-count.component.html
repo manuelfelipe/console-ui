@@ -1,0 +1,20 @@
+<div class="card box-shadow">
+  <div class="card-block">
+
+    <div class="card-title text-nowrap">
+      <img src="../../../assets/images/widgets/3d.svg" alt="3D" height="25" class="mr-1"/>
+      <span [innerHTML]="'WIDGETS_TITLE.DEPLOYMENTS' | translate"></span>
+    </div>
+
+    <div class="text-center metric"
+         counto
+         [step]="1"
+         [countTo]="count"
+         [countFrom]="0"
+         [duration]="0.1"
+         (countoChange)="counto = $event">
+      {{(counto) | number:'1.0-0'}}
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,7 @@
+ul.list-urls li .btn-grafana {
+  display: none;
+}
+
+ul.list-urls li:hover .btn-grafana {
+  display: inline-block;
+}

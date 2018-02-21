@@ -1,0 +1,9 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div *ngIf="hasErred">
+  Oops! It seems that this namespace does not have a valid Swagger endpoint.
+  <br/>
+  Please add the <code>/swagger.yaml</code> endpoint to your service and try again.
+</div>
+
+<div id="swagger-ui"></div>

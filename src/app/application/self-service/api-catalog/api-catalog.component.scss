@@ -1,0 +1,105 @@
+$SWAGGER_COLOR: #709827;
+
+.swagger-block {
+  height: 270px;
+  border-radius: 4px;
+  background: url('brackets-left.svg') left center no-repeat, url('./brackets-right.svg') right center no-repeat;
+  background-size: contain;
+
+  & > div {
+    height: 90px;
+  }
+
+  // on hover, replace ellipsis with btn
+  &:hover .swagger-ellipsis .btn-swagger {
+    display: block;
+  }
+
+  &:hover .swagger-ellipsis span {
+    display: none;
+  }
+}
+
+.swagger-info {
+  margin-left: auto;
+  margin-right: auto;
+
+  &-title {
+    color: $SWAGGER_COLOR;
+  }
+
+  &-namespace {
+    display: none;
+  }
+
+  &:hover {
+    .swagger-info-repo {
+      display: none;
+    }
+
+    .swagger-info-namespace {
+      display: block;
+    }
+  }
+}
+
+.swagger-ellipsis {
+  position: relative;
+  color: $SWAGGER_COLOR;
+  font-size: 36px;
+  font-weight: bold;
+
+  .btn-swagger {
+    display: none;
+    height: 30px;
+    margin: auto;
+    top: 0;
+    background-color: $SWAGGER_COLOR;
+    border: 1px solid $SWAGGER_COLOR;
+    color: white;
+
+    &:hover {
+      border-color: white;
+    }
+  }
+
+  span, .btn-swagger {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  span {
+    display: block;
+    letter-spacing: 10px;
+    height: 100%;
+    top: 10px;
+  }
+}
+
+.swagger-description {
+  margin: 0 auto;
+}
+
+.swagger-description > p {
+  position: relative;
+  font-size: 12px;
+  font-weight: 100;
+  overflow: hidden;
+  line-height: 1.5em;
+  height: 4.5em; /* (line-height * 3) = exactly three lines */
+
+  &:after {
+    content: '';
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 1.2em;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 100%, #fff);
+    //background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+  }
+}

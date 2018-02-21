@@ -1,0 +1,25 @@
+<form [formGroup]="formGroup" novalidate>
+  <div class="row">
+    <!-- type -->
+    <div class="col-md-3">
+      <label for="type">Database</label>
+      <div ngbDropdown>
+        <button id="type"
+                class="btn btn-secondary btn-block"
+                ngbDropdownToggle>{{formGroup?.value?.type || 'None'}}
+        </button>
+
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="btn dropdown-item"
+                  (click)="formGroup?.get('type')?.patchValue(null)">None
+          </button>
+
+          <button class="btn dropdown-item"
+                  *ngFor="let type of types;"
+                  (click)="formGroup?.get('type')?.patchValue(type)">{{type}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

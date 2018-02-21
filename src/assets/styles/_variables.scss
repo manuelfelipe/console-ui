@@ -1,0 +1,36 @@
+// palette taken from https://corporate.yp.ca
+$YP_BLUE: #1897CD;
+$YP_YELLOW: #FECC2F;
+$YP_YELLOW_DARK: darken($YP_YELLOW, 7);
+$YP_ORANGE: #FF6C00;
+$YP_PURPLE: #AE509A;
+$YP_GREEN: #54B44E;
+$YP_RED: #C9473E;
+
+$YP_DARK: #333333;
+$YP_LIGHT: #F9F9F9;
+$YP_BORDER: #CDCECF;
+
+$BITBUCKET: #205081;
+$AWS: #FAAF34;
+$GCE: #547DBF;
+$AZURE: #2EABE0;
+
+$BORDER_RADIUS: 0.25rem;
+
+// override Bootstrap's palette
+$red:    $YP_RED;
+$orange: $YP_ORANGE;
+$yellow: $YP_YELLOW;
+$green:  $YP_GREEN;
+$blue:   $YP_BLUE;
+$purple: $YP_PURPLE;
+$gray-dark: $YP_DARK;
+
+// for some reason,  !important is now required :/
+$enable-rounded: false !important;
+$border-radius: 0 !important;
+$border-radius-sm: 0 !important;
+$border-radius-lg: 0 !important;
+
+@import '../../../node_modules/bootstrap/scss/variables';

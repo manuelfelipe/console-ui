@@ -1,0 +1,15 @@
+@import '../../../../../../../assets/styles/variables';
+
+small {
+  font-weight: 100;
+  font-family: courier, monospace;
+}
+
+li {
+  word-wrap: break-word;
+  border-bottom: 1px solid darken($YP_DARK, 1%);
+
+  &:hover {
+    background-color: darken($YP_DARK, 5%);
+  }
+}

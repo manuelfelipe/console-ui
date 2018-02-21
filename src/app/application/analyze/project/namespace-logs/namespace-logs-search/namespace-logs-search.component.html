@@ -1,0 +1,49 @@
+<!-- searchText -->
+<form class="form-group" [formGroup]="formGroup" novalidate>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group"
+           [class.has-warning]="formGroup.controls.searchText?.dirty && !formGroup.controls.searchText?.valid">
+        <input type="text" class="form-control"
+               formControlName="searchText"
+               placement="bottom"
+               triggers="manual"
+               (keyup)="t.open()"
+               #t="ngbTooltip"
+               [ngbTooltip]="formGroup.controls.searchText?.dirty && !formGroup.controls.searchText?.valid && 'Only letters/digits are permitted'"
+               [class.form-control-warning]="formGroup.controls.searchText?.dirty && !formGroup.controls.searchText?.valid"
+               placeholder='Search Example: access denied 1.2.3.4 sshd'/>
+      </div>
+    </div>
+
+    <!-- since -->
+    <div class="col-3">
+      <div class="form-group">
+        <owl-date-time [hideClearButton]="true"
+                       [autoClose]="true"
+                       [inputStyleClass]="'form-control'"
+                       [showSecondsTimer]="true"
+                       formControlName="sinceDate"
+                       [min]="minDateTime"
+                       [max]="maxDateTime"
+                       (onSelect)="onSinceDateSelect($event.value)">
+        </owl-date-time>
+      </div>
+    </div>
+
+    <!-- to -->
+    <div class="col-3">
+      <div class="form-group">
+        <owl-date-time [hideClearButton]="true"
+                       [autoClose]="true"
+                       [inputStyleClass]="'form-control'"
+                       [showSecondsTimer]="true"
+                       formControlName="toDate"
+                       [min]="minDateTime"
+                       [max]="maxDateTime"
+                       (onSelect)="onToDateSelect($event.value)">
+        </owl-date-time>
+      </div>
+    </div>
+  </div>
+</form>

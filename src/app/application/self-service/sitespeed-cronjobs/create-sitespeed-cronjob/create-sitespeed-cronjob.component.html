@@ -1,0 +1,96 @@
+<form class="form-group" [formGroup]="formGroup" novalidate>
+  <div class="p-3">
+    <!-- name -->
+    <div class="form-group" [class.has-warning]="formGroup.get('name').dirty && !formGroup.get('name').valid">
+      <label for="name">Name</label>
+      <input id="name" class="form-control form-control-sm"
+             formControlName="name" placeholder="name"
+             [class.form-control-warning]="formGroup.get('name').dirty && !formGroup.get('name').valid">
+
+      <!-- name requirements -->
+      <small class="text-muted">Must be low3rcase-a7pha-num3ric.</small>
+      <small class="text-muted">Choose carefully, name can't be changed after!</small>
+    </div>
+
+    <!-- schedule -->
+    <div class="form-group" [class.has-warning]="!(formGroup.value.schedule | cronToText)">
+      <label for="schedule">Schedule</label>
+
+      <br/>
+
+      <div class="btn-group btn-group-sm" ngbDropdown>
+
+        <button class="btn btn-secondary" ngbDropdownToggle>{{isCustomSchedule ? 'Custom' : selectedSchedule.label}}
+        </button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="btn-sm dropdown-item"
+                  *ngFor="let schedule of schedules;"
+                  (click)="selectSchedule(schedule)">{{schedule.label}}
+          </button>
+
+          <div class="dropdown-divider"></div>
+          <button class="btn-sm dropdown-item" (click)="isCustomSchedule = true;">Custom</button>
+        </div>
+
+        <!-- if cronjob, because `my-cron-selection` does not take initial cron -->
+        <input id="schedule" class="form-control form-control-sm"
+               formControlName="schedule"
+               [hidden]="!isCustomSchedule"
+               [class.form-control-warning]="!(formGroup.value.schedule | cronToText)"/>
+      </div>
+
+      <small class="text-muted">{{formGroup.value.schedule | cronToText}}</small>
+
+      <br/>
+
+      <!-- more cron info (Wikipedia) -->
+      <small class="text-muted">
+        See
+        <a href="https://en.wikipedia.org/wiki/Cron" target="_blank">
+          https://en.wikipedia.org/wiki/Cron
+        </a>
+        for more information. <span *ngIf="isCustomSchedule">Minimum interval is 3 hours.</span>
+      </small>
+    </div>
+
+    <!-- urls -->
+    <div class="form-group" [class.has-warning]="formGroup.get('urls').dirty && !formGroup.get('urls').valid">
+      <label for="urls">URLs</label>
+      <textarea id="urls" class="form-control form-control-sm" formControlName="urls" rows="7"
+                placeholder="urls (one url by line)"
+                [class.form-control-warning]="formGroup.get('urls').dirty && !formGroup.get('urls').valid"></textarea>
+    </div>
+
+    <!-- args -->
+    <div class="form-group" [class.has-warning]="formGroup.get('args').dirty && !formGroup.get('args').valid">
+      <label for="args">Arguments</label>
+      <textarea id="args" class="form-control form-control-sm" formControlName="args" rows="7"
+                placeholder="arguments (one argument by line)"
+                [class.form-control-warning]="formGroup.get('args').dirty && !formGroup.get('args').valid"></textarea>
+
+      <small class="text-muted">Refer to sitespeed.io
+        <a href="https://www.sitespeed.io/documentation/sitespeed.io/configuration" target="_blank">
+          configuration docs
+        </a>
+      </small>
+    </div>
+
+    <hr/>
+
+    <div class="text-right">
+      <!-- if no cronjob, call `create()` -->
+      <button class="btn btn-sm btn-outline-success"
+              *ngIf="!cronjob"
+              [disabled]="!formGroup.valid"
+              (click)="create()">{{'ACTIONS.CREATE' | translate}}
+      </button>
+
+      <!-- if cronjob, call `update()` -->
+      <button class="btn btn-sm btn-outline-success"
+              *ngIf="cronjob"
+              [disabled]="!formGroup.valid"
+              (click)="update()">{{'ACTIONS.UPDATE' | translate}}
+      </button>
+    </div>
+  </div>
+</form>

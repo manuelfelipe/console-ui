@@ -1,0 +1,82 @@
+<section class="consumer-config-form">
+
+  <div ngbDropdown class="mb-3">
+    <button ngbDropdownToggle
+            id="consumerSelection"
+            class="btn btn-secondary text-truncate"
+            [disabled]="!consumers || consumers.length === 0">
+      <span *ngIf="consumers && consumers.length > 0">{{selectedConsumer?.username || selectedConsumer?.customId || '--select consumer--'}}</span>
+      <span *ngIf="!consumers || consumers.length === 0">no consumers</span>
+    </button>
+
+    <div class="dropdown-menu" ngbDropdownMenu>
+      <button class="btn-sm dropdown-item" *ngFor="let consumer of consumers;"
+              (click)="selectConsumer(consumer)">
+        {{consumer.username || consumer.customId}}
+      </button>
+    </div>
+  </div>
+
+  <ngb-tabset class="nav-justified w-100" *ngIf="selectedConsumer">
+    <ngb-tab title="ACLs">
+      <ng-template ngbTabContent>
+        <app-consumer-config-list
+          [namespace]="namespace"
+          [consumer]="selectedConsumer"
+          [pluginName]="'acls'">
+        </app-consumer-config-list>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Key Auth">
+      <ng-template ngbTabContent>
+        <app-consumer-config-list
+          [namespace]="namespace"
+          [consumer]="selectedConsumer"
+          [pluginName]="'key-auth'">
+        </app-consumer-config-list>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Basic Auth">
+      <ng-template ngbTabContent>
+        <app-consumer-config-list
+          [namespace]="namespace"
+          [consumer]="selectedConsumer"
+          [pluginName]="'basic-auth'">
+        </app-consumer-config-list>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="OAuth2">
+      <ng-template ngbTabContent>
+        <app-consumer-config-list
+          [namespace]="namespace"
+          [consumer]="selectedConsumer"
+          [pluginName]="'oauth2'">
+        </app-consumer-config-list>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="HMAC Auth">
+      <ng-template ngbTabContent>
+        <app-consumer-config-list
+          [namespace]="namespace"
+          [consumer]="selectedConsumer"
+          [pluginName]="'hmac-auth'">
+        </app-consumer-config-list>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="JWT">
+      <ng-template ngbTabContent>
+        <app-consumer-config-list
+          [namespace]="namespace"
+          [consumer]="selectedConsumer"
+          [pluginName]="'jwt'">
+        </app-consumer-config-list>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+</section>

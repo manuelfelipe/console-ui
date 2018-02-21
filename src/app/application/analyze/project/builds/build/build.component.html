@@ -1,0 +1,61 @@
+<div class="container mt-5">
+
+  <h2 class="section-title">
+    Build Details
+    <span *ngIf="owner && repository">- {{owner}}/{{repository}}</span>
+  </h2>
+
+  <div class="card card-outline-{{BuildStatus[build?.status] | buildStatusToClass}} mb-3">
+    <div class="card-header">
+      <!-- show correct icon based on build status -->
+      <span class="mr-2">
+      <span class="icon-arrows-circle-check"
+            *ngIf="build?.status === BuildStatus.success">
+      </span>
+      <span class="icon-arrows-circle-remove"
+            *ngIf="build?.status === BuildStatus.failure || build?.status === BuildStatus.killed">
+      </span>
+      <span class="icon-arrows-clockwise-dashed spin"
+            *ngIf="build?.status === BuildStatus.pending || build?.status === BuildStatus.running">
+      </span>
+    </span>
+
+      <span>{{build?.message}}</span>
+      <span class="badge badge-pill badge-{{BuildStatus[build?.status] | buildStatusToClass}} float-right mt-1">#{{build?.number}}</span>
+    </div>
+
+    <div class="card-block">
+      <!-- author build action -->
+      <div class="text-nowrap" *ngIf="build">
+        <span class="text-primary">{{build?.author}}</span>
+        <span>
+        <span class="icon-arrows-slim-right"></span>
+        {{BuildEvent[build?.event]}}
+        <span class="icon-arrows-slim-right"></span>
+      </span>
+        <span class="text-primary">{{build?.branch}}</span>
+      </div>
+
+      <!-- build details (creation time and duration) -->
+      <small class="build-time text-muted" *ngIf="build">
+      <span>
+        <img src="../../../../../../assets/icons/clock.svg" alt="Started at" height="16"/>
+        {{build?.createdAt | amTimeAgo}}
+      </span>
+
+        <!-- show duration only if build was finished (success or failure) -->
+        <span *ngIf="build?.status === BuildStatus.success || build?.status === BuildStatus.failure">
+        <img src="../../../../../../assets/icons/clessidre.svg" alt="Duration" height="16"/>
+        {{(build?.finishedAt - build?.createdAt) | amDuration:'milliseconds'}}
+      </span>
+      </small>
+
+      <hr>
+
+      <app-build-actions [build]="build" [owner]="owner" [repository]="repository"></app-build-actions>
+    </div>
+  </div>
+
+  <app-build-logs [build]="build" [owner]="owner" [repository]="repository"></app-build-logs>
+
+</div>

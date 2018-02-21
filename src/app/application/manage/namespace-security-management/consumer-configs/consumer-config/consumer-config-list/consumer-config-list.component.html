@@ -1,0 +1,43 @@
+<table class="table table-sm table-hover mb-5">
+  <thead>
+  <tr>
+    <th *ngFor="let field of pluginSchema | objectToArray">
+      {{field.key | startCase}}
+    </th>
+    <th>Created at</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngIf="!configs || configs.length === 0">
+    <td colspan="15" class="text-center text-muted p-4 no-configs">No configs yet...</td>
+  </tr>
+
+  <tr *ngFor="let config of configs;">
+    <!-- specific plugin config -->
+    <td *ngFor="let field of pluginSchema | objectToArray;">
+      {{config[field.key]}}
+      <app-copy-to-clipboard [content]="config[field.key]"></app-copy-to-clipboard>
+    </td>
+
+    <!-- created at -->
+    <td>{{config.createdAt | date:'shortDate'}}</td>
+
+    <!-- delete -->
+    <td class="text-right">
+      <button class="btn btn-sm btn-outline-danger" (click)="deleteConsumerPluginConfig(config)">
+        <span class="icon-arrows-circle-remove"></span> {{'ACTIONS.DELETE' | translate}}
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- create new plugin config -->
+<app-consumer-config-form
+  [consumer]="consumer"
+  [pluginName]="pluginName"
+  [namespace]="namespace"
+  (consumerConfigCreated)="consumerPluginConfigCreated($event)">
+</app-consumer-config-form>

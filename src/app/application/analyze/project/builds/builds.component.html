@@ -1,0 +1,72 @@
+<!-- Contributors list -->
+<div class="card mb-3">
+  <div class="card-block bg-faded">
+    <span class="card-title">{{'BUILDS.CONTRIBUTORS' | translate}}</span>
+  </div>
+
+  <app-loading [isLoading]="isLoadingContributors" [class.my-3]="isLoadingContributors"></app-loading>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let contributor of contributors">
+      <img class="rounded-circle mr-3" [src]="contributor.avatar" alt="Avatar" height="30"/>
+      <span class="mr-auto">{{contributor.name}}</span>
+      <small class="badge badge-default badge-pill">{{contributor.commitsCount}} {{'BUILDS.COMMITS' | translate |
+        lowercase}}
+      </small>
+    </li>
+  </ul>
+</div>
+
+<!-- Builds list -->
+<div class="card">
+  <div class="card-block bg-faded">
+    <span class="card-title">{{'BUILDS.BUILDS' | translate}}</span>
+  </div>
+
+  <app-loading [isLoading]="isLoadingBuilds" [class.my-3]="isLoadingContributors"></app-loading>
+
+  <table class="table table-responsive table-hover table-builds">
+    <tbody>
+    <tr *ngFor="let build of builds; trackBy: build?.number;"
+        class="row-hover-{{BuildStatus[build.status] | buildStatusToClass}}">
+      <td>
+        <span class="badge badge-{{BuildStatus[build.status] | buildStatusToClass}}">#{{build.number}}</span>
+      </td>
+      <td>
+        <span class="text-{{BuildStatus[build.status] | buildStatusToClass}}">{{build.message}}</span>
+      </td>
+      <td class="small">
+        <!-- author build action -->
+        <div class="text-nowrap">
+          <span class="text-primary">{{build.author}}</span>
+          <span>
+            <span class="icon-arrows-slim-right"></span>
+            {{BuildEvent[build.event]}}
+            <span class="icon-arrows-slim-right"></span>
+          </span>
+          <span class="text-primary">{{build.branch}}</span>
+        </div>
+
+        <!-- build details (creation time and duration) -->
+        <div class="build-time text-muted">
+          <span>
+            <span class="icon-basic-clock"></span> {{build.createdAt | amTimeAgo}}
+          </span>
+
+          <!-- show duration only if build was finished (success or failure) -->
+          <span *ngIf="build.status === BuildStatus.success || build.status === BuildStatus.failure">
+            <span class="icon-basic-clessidre"></span> {{(build.finishedAt - build.createdAt) | amDuration:'milliseconds'}}
+          </span>
+        </div>
+      </td>
+      <td>
+        <a class="btn btn-outline-primary btn-xs bg-white" target="_blank"
+           [routerLink]="[build?.number]">
+          <fa [name]="'align-left'"></fa>
+          {{'ACTIONS.VIEW_LOGS' | translate}}
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

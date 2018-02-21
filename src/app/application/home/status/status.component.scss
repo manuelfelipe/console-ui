@@ -1,0 +1,21 @@
+@import '../../../../assets/styles/variables';
+
+small {
+  font-size: 60%;
+}
+
+.infra-success {
+  border: 1px solid $YP_GREEN;
+  color: $YP_GREEN;
+}
+
+.infra-danger {
+  border: 1px solid $YP_RED;
+  color: $YP_RED;
+}
+
+.icon-status {
+  float: right;
+  font-size: 25px;
+  margin-top: -10px;
+}

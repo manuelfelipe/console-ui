@@ -1,0 +1,43 @@
+<form [formGroup]="formGroup" novalidate>
+  <div class="row">
+    <!-- project owner -->
+    <div class="col-md-3">
+      <label for="owner">Project</label>
+      <div ngbDropdown>
+        <button id="owner"
+                class="btn btn-secondary btn-block"
+                ngbDropdownToggle>{{formGroup?.value?.owner || '- select project -'}}
+        </button>
+
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="btn dropdown-item"
+                  *ngFor="let project of projects;"
+                  (click)="onProjectSelect(project.key)">{{project.key}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- project repo -->
+    <div class="col-md-3">
+      <label for="repo">Repository</label>
+      <div ngbDropdown>
+        <button id="repo"
+                class="btn btn-secondary btn-block"
+                [disabled]="!formGroup?.value?.owner || isLoading"
+                [class.dropdown-toggle-loading]="isLoading"
+                ngbDropdownToggle>
+          <app-loading [isLoading]="isLoading" [size]="'xs'"></app-loading>
+          <span *ngIf="!isLoading">{{formGroup?.value?.repo || '- select repo -'}}</span>
+        </button>
+
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="btn dropdown-item"
+                  *ngFor="let repo of repos;"
+                  (click)="formGroup?.get('repo')?.patchValue(repo.slug)">{{repo.slug}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

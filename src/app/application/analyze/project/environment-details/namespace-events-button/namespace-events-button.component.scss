@@ -1,0 +1,31 @@
+@import '../../../../../../assets/styles/variables';
+
+.has-warnings {
+  color: $YP_ORANGE;
+  -webkit-animation: flashing 1s linear infinite;
+  animation: flashing 1s linear infinite;
+}
+
+@-webkit-keyframes flashing {
+  0% {
+    color: $YP_BLUE;
+  }
+  50.0% {
+    color: $YP_ORANGE;
+  }
+  100.0% {
+    color: $YP_BLUE;
+  }
+}
+
+@keyframes flashing {
+  0% {
+    color: $YP_BLUE;
+  }
+  50.0% {
+    color: $YP_ORANGE;
+  }
+  100.0% {
+    color: $YP_BLUE;
+  }
+}

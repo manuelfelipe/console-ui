@@ -1,0 +1,13 @@
+@import '../../../../../../assets/styles/variables';
+
+.table-events {
+  td, th {
+    padding: 0 10px;
+    vertical-align: middle;
+    border: none;
+  }
+
+  tbody tr:hover {
+    background-color: darken($YP_DARK, 5%);
+  }
+}

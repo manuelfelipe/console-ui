@@ -1,0 +1,20 @@
+<div class="submenu" [class.submenu--opened]="opened" [class.submenu--closed]="!opened">
+  <!-- Submenu title -->
+  <div *ngIf="submenuContent" class="submenu-title text-center">
+    <button class="btn btn-link" (click)="closeSubmenu()">
+      <span class="icon-arrows-left submenu-title-close-icon"></span>
+      <span class="my-auto">{{'SIDEBAR.' + submenuContent | uppercase | translate}}</span>
+    </button>
+  </div>
+
+  <!-- Submenu items -->
+  <div *ngIf="submenuContent && content[submenuContent]" class="submenu-items">
+    <button class="btn bg-transparent"
+            *ngFor="let item of content[submenuContent];"
+            [routerLink]="[item.path]"
+            [queryParams]="item.path === '/projects' && item.redirect ? { redirect: item.redirect } : {}"
+            [routerLinkActive]="['is-active']">
+      <span class="label">{{submenuContent + '.' + item.title | uppercase | translate}}</span>
+    </button>
+  </div>
+</div>

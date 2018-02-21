@@ -1,0 +1,52 @@
+<form *ngIf="formGroup" [formGroup]="formGroup" class="p-3">
+  <h4>Add new config</h4>
+  <hr/>
+
+  <div class="row mb-4" *ngFor="let control of formGroup?.controls | objectToArray;">
+    <div class="col-12">
+      <span>
+        <label for="{{control.key}}" class="mb-0">
+          {{control.key | startCase}}
+          <span class="text-danger" *ngIf="pluginSchema[control.key].required">*</span>
+          <small class="text-muted">({{SchemaFieldType[pluginSchema[control.key].type]}})</small>
+        </label>
+      </span>
+    </div>
+
+    <div class="col-md-4">
+      <div class="input-group">
+        <input
+          id="{{control.key}}"
+          class="form-control"
+          [(ngModel)]="formGroup?.controls[control.key].value"
+          [formControlName]="control.key"/>
+        <span class="input-group-addon" id="basic-addon2"
+              *ngIf="control.key === 'group' && suffix">{{suffix}}</span>
+      </div>
+    </div>
+
+    <div class="col-md-8 align-items-center d-inline-flex">
+      <div>
+        <small [innerHTML]="pluginSchema[control.key].description"></small>
+        <small *ngIf="pluginSchema[control.key].default">
+          Defaults to<code>{{pluginSchema[control.key].default}}</code>.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col-md-6">
+      <small><span class="text-danger">*</span> = {{'ACTIONS.REQUIRED_FIELD' | translate | lowercase}}</small>
+    </div>
+    <div class="col-md-6 text-md-right">
+      <button class="btn btn-outline-success"
+              [disabled]="!formGroup.valid"
+              (click)="submit()">
+        <span class="icon-arrows-circle-plus"></span> Create
+      </button>
+    </div>
+  </div>
+</form>

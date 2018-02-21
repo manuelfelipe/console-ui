@@ -1,0 +1,6 @@
+<button class="btn btn-sm btn-link" (click)="openNamespaceEventsWindow();">
+  <fa [name]="'exclamation-circle'" [class.has-warnings]="warnings.size > 0"></fa> {{'EVENT.EVENTS' | translate}}
+  <small *ngIf="warnings.size > 0">
+    ({{warnings.size}} {{'EVENT.WARNING' | translate | lowercase}}<span *ngIf="warnings.size > 1">s</span> )
+  </small>
+</button>

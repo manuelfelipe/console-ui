@@ -1,0 +1,84 @@
+@import '../../../../assets/styles/variables';
+
+.switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 80px;
+  height: 30px;
+  padding: 3px;
+  margin-left: -3px;
+  margin-top: -3px;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.switch-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.switch-label {
+  position: relative;
+  display: block;
+  height: inherit;
+  font-size: 16px;
+  font-weight: normal;
+  text-transform: uppercase;
+  background: white;
+  border: 1px solid $YP_BORDER;
+  border-radius: 15px;
+  transition: 0.15s ease-out background;
+  color: $YP_DARK;
+}
+
+.switch-label::before, .switch-label::after {
+  position: absolute;
+  top: 50%;
+  margin-top: -.5em;
+  line-height: 1;
+  transition: inherit;
+}
+
+.switch-label::before {
+  content: attr(data-off);
+  right: 11px;
+}
+
+.switch-label::after {
+  content: attr(data-on);
+  left: 11px;
+  color: $YP_GREEN;
+  opacity: 0;
+}
+
+.switch-handle {
+  position: absolute;
+  top: 9px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+  background: $YP_BORDER;
+  border-radius: 10px;
+  transition: left 0.15s ease-out;
+}
+
+.checked .switch-label {
+  border: 1px solid $YP_GREEN;
+}
+
+.checked .switch-label::before {
+  opacity: 0;
+}
+
+.checked .switch-label::after {
+  opacity: 1;
+}
+
+.checked .switch-handle {
+  left: 52px;
+  background: $YP_GREEN;
+}

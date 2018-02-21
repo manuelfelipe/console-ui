@@ -1,0 +1,54 @@
+<div class="card h-100 box-shadow card-status-{{getCoverageClass(getMetric(metrics, 'coverage'))}}">
+  <div class="card-block">
+
+    <div class="card-title">
+      <img src="../../../../../../assets/images/widgets/star.svg" alt="Star" height="25" class="mr-1"/>
+      {{'WIDGETS_TITLE.CODE_QUALITY' | translate}}
+    </div>
+
+    <app-loading [isLoading]="isLoading"></app-loading>
+
+    <div class="card-text-content" *ngIf="!isLoading">
+      <div class="row bg-faded py-2 mb-2 text-center">
+        <!-- Code Coverage -->
+        <div class="col-6">
+          <app-number-card [value]="getMetric(metrics, 'coverage')"
+                           [format]="'1.0-2'"
+                           [label]="'METRICS.coverage' | translate"
+                           [unit]="'%'"
+                           [type]="'info'">
+          </app-number-card>
+        </div>
+
+        <!-- Technical Debt -->
+        <div class="col-6">
+          <app-number-card [value]="getMetric(metrics, 'sqale_index')"
+                           [format]="'1.0-0'"
+                           [label]="'METRICS.sqale_index' | translate"
+                           [unit]="'min'"
+                           [type]="'info'">
+          </app-number-card>
+        </div>
+      </div>
+
+      <div class="row py-1 text-center">
+        <!-- Lines of Code -->
+        <div class="col-6">
+          <app-number-card [value]="getMetric(metrics, 'ncloc')"
+                           [format]="'1.0-0'"
+                           [label]="'METRICS.ncloc' | translate"
+                           [type]="'info'">
+          </app-number-card>
+        </div>
+        <!-- Duplicated Blocks -->
+        <div class="col-6">
+          <app-number-card [value]="getMetric(metrics, 'duplicated_blocks')"
+                           [format]="'1.0-0'"
+                           [label]="'METRICS.duplicated_blocks' | translate"
+                           [type]="'info'">
+          </app-number-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

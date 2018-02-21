@@ -1,0 +1,17 @@
+<button class="btn btn-sm btn-outline-primary"
+        (click)="restartBuild()"
+        *ngIf="!isBuildInProgress(build)"
+        [disabled]="!owner || !repository || !build">
+  {{'ACTIONS.RESTART' | translate}}
+</button>
+
+<button class="btn btn-sm btn-outline-primary"
+        *ngIf="isBuildInProgress(build)">
+  {{'ACTIONS.FOLLOW' | translate}}
+</button>
+
+<button class="btn btn-sm btn-outline-danger"
+        (click)="stopBuild()"
+        *ngIf="isBuildInProgress(build)">
+  {{'ACTIONS.STOP' | translate}}
+</button>

@@ -1,0 +1,37 @@
+<ngb-alert *ngIf="!isAlertDismissed"
+           (close)="isAlertDismissed = true"
+           [type]="'info'"
+           [dismissible]="true"
+           class="text-center">
+  <h4 class="alert-heading">The new TheCloud Console <sup style="font-size: 8px; top: -1.2em; left: -0.5em;">beta</sup> experience</h4>
+  Same great platform, brand new user experience
+  <fa [name]="'bolt'"></fa>
+</ngb-alert>
+
+<ngb-tabset [justify]="'justified'">
+  <ngb-tab title="{{'HOME.DASHBOARD' | translate}}">
+    <ng-template ngbTabContent>
+      <app-overview></app-overview>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="{{'HOME.ACTIVITY' | translate}}">
+    <ng-template ngbTabContent>
+      <app-activity></app-activity>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="{{'HOME.SLA' | translate}}">
+    <ng-template ngbTabContent>
+      <app-uptime-infra></app-uptime-infra>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="{{'HOME.STATUS' | translate}}">
+    <ng-template ngbTabContent>
+      <app-status></app-status>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="{{'HOME.TRAFFIC' | translate}}">
+    <ng-template ngbTabContent>
+      <app-traffic></app-traffic>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

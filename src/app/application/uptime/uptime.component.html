@@ -1,0 +1,46 @@
+<div class="card">
+  <h4 class="card-header">
+    SLA Report
+
+    <!-- interval -->
+    <app-uptime-search
+      class="pull-right"
+      [category]="category"
+      [kind]="kind"
+      [namespace]="namespace"
+      (search)="onSearch($event)">
+    </app-uptime-search>
+  </h4>
+
+  <div class="card-body">
+    <!-- loading -->
+    <app-loading [isLoading]="isLoading" [class.my-3]="isLoading"></app-loading>
+
+    <!-- if none found -->
+    <div *ngIf="!isLoading && uptimes.length === 0" class="text-center text-muted">
+      No uptimes found. Try another range ;)
+    </div>
+
+    <!-- uptimes table -->
+    <div class="table-responsive" *ngIf="!isLoading && uptimes.length > 0">
+      <table class="table table-striped table-hover table-sm mb-0">
+        <thead>
+        <tr>
+          <td></td>
+          <th *ngFor="let uptime of uptimes;" class="text-nowrap">{{uptime.label}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td scope="row" class="pl-3">Uptime</td>
+          <td *ngFor="let uptime of uptimes;">{{uptime.sla | number:'1.0-2'}}%</td>
+        </tr>
+        <tr>
+          <td scope="row" class="pl-3">Response time</td>
+          <td *ngFor="let uptime of uptimes;">N/A</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

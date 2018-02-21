@@ -1,0 +1,58 @@
+<div class="card box-shadow h-100 card-top-{{getStatusClass()}}">
+  <div class="card-block">
+
+    <div class="card-title">
+      <img src="../../../../../../assets/images/widgets/status.svg" alt="Bolt" height="25" class="mr-1"/>
+      {{'WIDGETS_TITLE.NAMESPACE_HEALTH' | translate}}
+
+      <!-- Badge status -->
+      <span class="badge badge-health badge-{{getStatusClass()}}" [class.has-failed]="serviceHealth === -1">
+        <span *ngIf="!serviceHealth"> <fa [name]="'refresh'" class="spin"></fa> </span>
+        <span *ngIf="serviceHealth">{{(serviceHealth === 1) ? 'HEALTHY': 'ERROR'}}</span>
+      </span>
+    </div>
+
+    <app-loading [isLoading]="isLoading"></app-loading>
+
+    <div class="card-text-content">
+      <!-- URLs -->
+      <div class="row">
+        <div class="col-9">
+          <!-- Service URL -->
+          <div *ngIf="serviceUrl">
+            <strong>URL:</strong> {{serviceUrl | lowercase}}
+            <app-copy-to-clipboard [content]="serviceUrl"></app-copy-to-clipboard>
+          </div>
+
+          <!-- Service Upstream URL -->
+          <div *ngIf="serviceUpstreamUrl">
+            <strong>Internal URL:</strong> {{serviceUpstreamUrl | lowercase}}
+            <app-copy-to-clipboard [content]="serviceUpstreamUrl"></app-copy-to-clipboard>
+          </div>
+
+          <!-- View Aggregated Logs -->
+          <div *ngIf="namespace" class="mt-3">
+            <a [routerLink]="['/analyze', namespace, 'logs']" target="_blank" class="btn btn-xs btn-outline-primary">
+              <span class="icon-basic-sheet-txt"></span> View Aggregated Logs
+            </a>
+          </div>
+        </div>
+
+        <!-- SLA -->
+        <div class="col-3 text-center" *ngIf="serviceSLA > -1" style="margin-top: -15px;">
+          <app-number-card [value]="serviceSLA"
+                           [format]="'1.0-2'"
+                           [type]="getSLAClass()"
+                           [label]="'Today\'s Uptime'"
+                           [unit]="'%'"
+                           [size]="'lg'"
+                           [outline]="true"
+                           placement="bottom"
+                           ngbTooltip="Since 12:00am">
+          </app-number-card>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

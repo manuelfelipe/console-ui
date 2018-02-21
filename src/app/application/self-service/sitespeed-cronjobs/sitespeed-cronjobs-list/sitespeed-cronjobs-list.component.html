@@ -1,0 +1,101 @@
+<p>
+  This is the full list of SiteSpeed Jobs. They will be running based on the defined cron schedule, and generate a
+  <a href="https://www.sitespeed.io" target="_blank">sitespeed.io</a> report for all your URLs.
+  Note that you can view the <code>arguments</code> of your own jobs only,
+  as they may contain sensitive information. Also, you may only <code>edit/delete</code> your own jobs.
+</p>
+
+<div class="text-right mb-3">
+  <button class="btn btn-sm btn-outline-success" (click)="createCronJob()">+ Create SiteSpeed Job</button>
+</div>
+
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div class="card" *ngFor="let cronjob of cronjobs;">
+  <div class="card-header cursor-hover" (click)="toggleCronJob(cronjob)">
+    <span class="text-inverse"
+          [ngClass]="{ 'icon-arrows-down': !isCollapsed[cronjob.uid], 'icon-arrows-up': isCollapsed[cronjob.uid] }"></span>
+    {{cronjob.name}}
+
+    <!-- username -->
+    <span class="badge float-right" [ngClass]="(cronjob.username === username) ? 'badge-info' : 'badge-default'">
+      {{cronjob.username | na:('NA' | translate)}}
+    </span>
+  </div>
+
+  <!-- cronjob settings -->
+  <div id="collapse_{{cronjob.uid}}" [ngbCollapse]="!isCollapsed[cronjob.uid]" class="p-3">
+    Schedule:
+    <small><code>{{cronjob.schedule}}</code></small>
+    <small class="text-muted">({{cronjob.schedule | cronToText}})</small>
+
+    <br/>
+    <br/>
+
+    URLs:
+    <ul class="list-unstyled list-urls">
+      <li *ngFor="let url of cronjob.urls">
+        <a [href]="url" target="_blank">
+          <small>{{url}}</small>
+        </a>
+
+        <!-- grafana link -->
+        <a class="btn btn-xs btn-secondary btn-grafana" [href]="getGrafanaUrl(url)" target="_blank">
+          <img src="../../../../../assets/icons/grafana-icon.png" height="16" alt="Grafana Icon">
+          View Grafana
+          <span class="icon-arrows-circle-upright"></span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- args if belongs to current user -->
+    <div *ngIf="cronjob.username === username">
+      Arguments:
+      <ul class="list-unstyled" *ngIf="cronjob.username === username">
+        <li *ngFor="let arg of getArgsWithoutURLs(cronjob)">
+          <small><code>{{arg}}</code></small>
+        </li>
+      </ul>
+    </div>
+
+    <hr/>
+
+    <div class="text-right">
+      <!-- if reports, clickable <a>, otherwise disabled -->
+      <a class="btn btn-sm btn-outline-primary" target="_blank"
+         [href]="(cronjob.reports && cronjob.reports.length > 0) ? cronjob.reports[0].url : null"
+         [class.disabled]="!cronjob.reports || cronjob.reports.length === 0">
+        <!-- loading -->
+        <app-loading [isLoading]="cronjob['isLoading']"></app-loading>
+
+        <!-- not loading, reports > 0 -->
+        <span *ngIf="!cronjob['isLoading'] && cronjob.reports && cronjob.reports.length > 0"
+              class="icon-basic-sheet-txt"> Latest Report</span>
+
+        <!-- not loading, reports = 0 -->
+        <span *ngIf="!cronjob['isLoading'] && !cronjob.reports || (cronjob.reports && cronjob.reports.length === 0)"
+              class="icon-basic-sheet"> No reports yet...</span>
+      </a>
+
+      <!-- if more than 1 report, view all in modal -->
+      <button class="btn btn-sm btn-link"
+              (click)="viewPastReports(cronjob)"
+              *ngIf="!cronjob['isLoading'] && cronjob.reports && cronjob.reports.length > 1">View past reports
+      </button>
+
+      <!-- edit -->
+      <button class="btn btn-sm btn-outline-primary"
+              *ngIf="cronjob.username === username"
+              (click)="editCronJob(cronjob)">
+        <span class="icon-basic-hammer"></span> {{'ACTIONS.UPDATE' | translate}}
+      </button>
+
+      <!-- delete -->
+      <button class="btn btn-sm btn-outline-danger"
+              *ngIf="cronjob.username === username"
+              (click)="deleteCronJob(cronjob.name)">
+        <span class="icon-basic-trashcan"></span> {{'ACTIONS.DELETE' | translate}}
+      </button>
+    </div>
+  </div>
+</div>

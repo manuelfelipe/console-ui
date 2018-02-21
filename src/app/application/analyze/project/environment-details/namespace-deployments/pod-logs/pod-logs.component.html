@@ -1,0 +1,35 @@
+<div class="bg-inverse h-100">
+
+  <div class="btn-logs">
+    <!-- filter logs -->
+    <div class="btn-group btn-logs-item" ngbDropdown>
+      <button class="btn btn-secondary" ngbDropdownToggle>{{filterMode}}</button>
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button class="dropdown-item" *ngFor="let fm of filterModes;" (click)="filterMode = fm">
+          {{fm}}
+        </button>
+      </div>
+
+      <input [(ngModel)]="filterText" class="form-control"/>
+    </div>
+
+    <!-- follow logs -->
+    <app-live-button
+      class="btn-logs-item"
+      *ngIf="!isPrevious"
+      [isLive]="isLiveTail"
+      (liveChanged)="toggleLiveTail()">
+    </app-live-button>
+
+    <!--<button class="btn btn-secondary btn-logs-item m-3" (click)="toggleLiveTail()" *ngIf="!isPrevious">-->
+      <!--<span class="icon-arrows-rotate" [class.spin]="isLiveTail"> </span>-->
+      <!--{{'ACTIONS.FOLLOW' | translate}}-->
+    <!--</button>-->
+  </div>
+
+  <ul class="bg-inverse list-unstyled text-white py-3 m-0">
+    <li *ngFor="let log of logs | filterBy:filterText:filterMode === 'include'; trackBy: trackByLogId" class="px-3">
+      <small [innerHTML]="log | ansiToHtml | trustHtml"></small>
+    </li>
+  </ul>
+</div>

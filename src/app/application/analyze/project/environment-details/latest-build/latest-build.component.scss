@@ -1,0 +1,33 @@
+@import '../../../../../../assets/styles/variables';
+
+a {
+  color: inherit;
+  border-bottom: 1px dotted #D8D8D8;
+
+  &:hover {
+    border-bottom-style: solid;
+  }
+}
+
+// Show exact date only when hovered on
+.build-time {
+  .build-time-date {
+    display: none;
+  }
+  .build-time-timeAgo {
+    display: inline-block;
+  }
+
+  &:hover {
+    .build-time-date {
+      display: inline-block;
+    }
+    .build-time-timeAgo {
+      display: none;
+    }
+  }
+}
+
+.badge-warning {
+  background-color: $YP_YELLOW_DARK !important;
+}

@@ -1,0 +1,19 @@
+<div class="btn-group btn-group-sm">
+  <button class="btn"
+          [ngClass]="(interval === UptimeInterval.daily) ? 'btn-primary' : 'btn-secondary'"
+          (click)="selectDaily()">
+    Daily
+  </button>
+
+  <button class="btn"
+          [ngClass]="(interval === UptimeInterval.weekly) ? 'btn-primary' : 'btn-secondary'"
+          (click)="selectWeekly()">
+    Weekly
+  </button>
+
+  <button class="btn"
+          [ngClass]="(interval === UptimeInterval.monthly) ? 'btn-primary' : 'btn-secondary'"
+          (click)="selectMonthly()">
+    Monthly
+  </button>
+</div>

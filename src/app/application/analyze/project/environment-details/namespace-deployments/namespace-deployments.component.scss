@@ -1,0 +1,48 @@
+@import '../../../../../../assets/styles/variables';
+
+.table thead td {
+  border-top: none;
+}
+
+// Show exact date only when hovered on
+.pod-time {
+  .pod-time-date {
+    display: none;
+  }
+  .pod-time-timeAgo {
+    display: inline-block;
+  }
+
+  &:hover {
+    .pod-time-date {
+      display: inline-block;
+    }
+    .pod-time-timeAgo {
+      display: none;
+    }
+  }
+}
+
+.table-pod-row {
+  td {
+    padding: 1px 0;
+    border: none;
+  }
+}
+
+.badge.badge-container-state.badge-warning {
+  background-color: $YP_YELLOW;
+}
+
+// override col-*
+.col-6 {
+  width: 50%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-2 {
+  width: 16.67%;
+}

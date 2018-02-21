@@ -1,0 +1,35 @@
+<span>
+  <small *ngIf="pod?.restartCount > 0"
+         [ngbPopover]="podLastState"
+         popoverTitle="Last State"
+         triggers="mouseenter:mouseleave">
+              <span class="badge badge-warning">
+              {{'ACTIONS.RESTARTED' | translate}} {{pod?.restartCount}}x</span>
+  </small>
+</span>
+
+<ng-template #podLastState>
+  <div class="p-1">
+    <div *ngIf="pod?.lastState?.running">
+      <div *ngIf="pod?.lastState?.running.startedAt">
+        <strong>Reason:</strong> <span>{{pod?.lastState?.running.startedAt | date:'medium'}}</span>
+      </div>
+    </div>
+
+    <div *ngIf="pod?.lastState?.terminated">
+      <div style="font-size: 10px;">
+        <pre [innerHTML]="pod?.lastState.terminated | prettyjson:2"></pre>
+      </div>
+    </div>
+
+    <div *ngIf="pod?.lastState?.waiting">
+      <div *ngIf="pod?.lastState?.waiting.reason">
+        <strong>Reason:</strong> <span>{{pod?.lastState?.waiting.reason}}</span>
+      </div>
+
+      <div *ngIf="pod?.lastState?.waiting.message">
+        <strong>Message:</strong> <span>{{pod?.lastState?.waiting.message}}</span>
+      </div>
+    </div>
+  </div>
+</ng-template>

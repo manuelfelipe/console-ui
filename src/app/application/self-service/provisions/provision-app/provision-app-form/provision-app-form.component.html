@@ -1,0 +1,48 @@
+<form [formGroup]="formGroup" novalidate>
+  <div class="row">
+    <!-- language -->
+    <div class="col-md-3">
+      <label for="language">Language</label>
+      <div ngbDropdown>
+        <button id="language"
+                class="btn btn-secondary btn-block"
+                ngbDropdownToggle>{{formGroup?.value?.language}}
+        </button>
+
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="btn dropdown-item"
+                  *ngFor="let language of languages;"
+                  (click)="formGroup?.get('language')?.patchValue(language)">{{language}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- type -->
+    <div class="col-md-3">
+      <label for="type">Type</label>
+      <div ngbDropdown>
+        <button id="type"
+                class="btn btn-secondary btn-block"
+                ngbDropdownToggle>{{formGroup?.value?.type}}
+        </button>
+
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="btn dropdown-item"
+                  *ngFor="let type of types;"
+                  (click)="formGroup?.get('type')?.patchValue(type)">{{type}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- configs -->
+    <div class="col-md-12 mt-3">
+      <label for="configs" class="cursor-hover">
+        <input id="configs" type="checkbox" formControlName="enableConfig"> Enable Config Management?
+      </label>
+
+      <div><small class="text-muted">Enabling configs will allow you to manage your app configurations through the <code>Manage > Config Management</code> tab.</small></div>
+    </div>
+  </div>
+</form>

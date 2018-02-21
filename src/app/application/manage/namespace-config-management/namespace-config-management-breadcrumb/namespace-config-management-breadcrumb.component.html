@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span class="icon-basic-folder"></span>
+  </li>
+
+  <li class="breadcrumb-item"
+      *ngFor="let key of splitSelectedKeys; let idx = index; let isLast = last;">
+
+    <a class="text-info" href="#" (click)="onKeyNavClicked(idx)" *ngIf="!isLast">{{key}}</a>
+
+    <!-- Last is not clickable -->
+    <span *ngIf="isLast">{{key}}</span>
+  </li>
+</ol>

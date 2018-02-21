@@ -1,0 +1,47 @@
+<div class="card box-shadow">
+  <div class="card-block">
+
+    <div class="card-title">
+      <img src="../../../../../assets/images/widgets/chip.svg" alt="Chip" height="25" class="mr-1"/>
+      {{'WIDGETS_TITLE.NODES_RESOURCES' | translate}}
+    </div>
+
+    <app-loading [isLoading]="isLoading"></app-loading>
+
+    <div *ngFor="let resource of resources" class="cluster-container cluster-container-{{resource.cluster}} mb-2">
+      <div class="cluster-title">{{resource.cluster}}</div>
+      <div class="card-text-content">
+        <div class="row mt-2">
+          <div class="col">
+            <app-number-card [value]="resource.cpu"
+                             [format]="'1.0-0'"
+                             [label]="'CPU'"
+                             [unit]="'cores'"
+                             [outline]="true"
+                             [color]="clustersColors[resource.cluster]">
+            </app-number-card>
+          </div>
+          <div class="col">
+            <app-number-card [value]="resource.memory | bytesToMegabytes"
+                             [format]="'1.0-0'"
+                             [label]="'Memory'"
+                             [unit]="'gb'"
+                             [outline]="true"
+                             [color]="clustersColors[resource.cluster]">
+            </app-number-card>
+          </div>
+          <div class="col">
+            <div *ngIf="resource.container">
+              <app-number-card [value]="resource.container"
+                               [format]="'1.0-0'"
+                               [label]="'Containers'"
+                               [outline]="true"
+                               [color]="clustersColors[resource.cluster]">
+              </app-number-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

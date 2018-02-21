@@ -1,0 +1,28 @@
+<!-- 500px to allow calendar popups to show -->
+<div style="min-height: 500px; font-weight: 100;">
+  <app-activity-search [namespace]="namespace" (search)="onSearch($event)"></app-activity-search>
+
+  <hr/>
+
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  <div *ngIf="!isLoading && events.length === 0" class="text-center text-muted">
+    No events found. Try refining your search ;)
+  </div>
+
+  <ul class="list-unstyled">
+    <li *ngFor="let event of events" class="event mb-1 p-1">
+      <!-- description -->
+      <span>{{event.description}}</span> -
+
+      <small class="text-muted">
+        <!-- namespace or project -->
+        <code *ngIf="event.namespace">{{event.namespace}}</code>
+        <code *ngIf="!event.namespace"><fa [name]="'bitbucket'" [fw]="true" class="bitbucket"></fa> {{event.project?.owner}}/{{event.project?.repo}}</code>
+
+        <!-- time ago -->
+        <span class="icon-basic-clessidre"></span> {{event.timestamp | amFromUtc | amTimeAgo:false}}
+      </small>
+    </li>
+  </ul>
+</div>

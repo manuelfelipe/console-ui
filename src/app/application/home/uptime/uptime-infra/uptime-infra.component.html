@@ -1,0 +1,56 @@
+<div class="card">
+  <h4 class="card-header">
+    SLA Report
+
+    <!-- interval -->
+    <app-uptime-search
+      class="pull-right"
+      [category]="'infra'"
+      [kind]="null"
+      [namespace]="null"
+      (search)="onSearch($event)">
+    </app-uptime-search>
+  </h4>
+
+  <div class="card-body">
+    <!-- loading -->
+    <app-loading [isLoading]="isLoading" [class.my-3]="isLoading"></app-loading>
+
+    <!-- if none found -->
+    <div *ngIf="!isLoading && dates.length === 0" class="text-center text-muted">
+      No uptimes found. Try another range ;)
+    </div>
+
+    <!-- uptimes table -->
+    <div class="table-responsive" *ngIf="!isLoading && dates.length > 0">
+      <table class="table table-hover table-sm mb-0">
+        <thead>
+        <tr>
+          <td></td>
+          <th *ngFor="let date of dates;" class="text-nowrap">{{date.label}}</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let infrasUptime of infrasUptimes;">
+        <tr class="bg-faded">
+          <td class="text-nowrap">
+            {{infrasUptime.infra?.description}}
+          </td>
+          <td colspan="20"></td>
+        </tr>
+        <tr>
+          <td scope="row" class="pl-3">Uptime</td>
+          <td *ngFor="let date of dates;">
+            <span *ngIf="infrasUptime.uptimes[date.label]">{{infrasUptime.uptimes[date.label].sla | number:'1.0-2'}}%</span>
+            <span *ngIf="!infrasUptime.uptimes[date.label]">{{'NA' | translate}}</span>
+          </td>
+        </tr>
+        <!-- removed temporarily -->
+        <!--<tr>-->
+          <!--<td scope="row" class="pl-3">Response time</td>-->
+          <!--<td *ngFor="let date of dates;">N/A</td>-->
+        <!--</tr>-->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+{
+  "NA": "N/A",
+  "HEADER": {
+    "LOGOUT": "Logout"
+  },
+  "HOME": {
+    "DASHBOARD": "Dashboard",
+    "ACTIVITY": "Activity",
+    "API_CATALOG": "API Catalog",
+    "SLA": "SLA",
+    "STATUS": "Status",
+    "TRAFFIC": "Traffic"
+  },
+  "SELF_SERVICE": {
+    "SITESPEED_JOBS": "SiteSpeed Jobs",
+    "PROVISIONS": "Provisions"
+  },
+  "ACTIONS": {
+    "VIEW_LOGS": "View Logs",
+    "SHOW_CONFIG_MAPS": "Show Configs",
+    "FOLLOW": "Follow",
+    "TERMINATE": "Terminate",
+    "RESTART": "Restart",
+    "RESTARTED": "Restarted",
+    "STOP": "Stop",
+    "READ_MORE": "Read more",
+    "READ_LESS": "Read less",
+    "ENABLE": "Enable",
+    "DISABLE": "Disable",
+    "CREATE": "Create",
+    "UPDATE": "Update",
+    "DELETE": "Delete",
+    "DOWNLOAD": "Download",
+    "REQUIRED_FIELD": "Required field"
+  },
+  "EVENT": {
+    "EVENTS": "Events",
+    "WARNING": "Warning",
+    "TYPE": "Type",
+    "LAST_SEEN": "Last Seen",
+    "FIRST_SEEN": "First Seen",
+    "COUNT": "Count",
+    "REASON": "Reason",
+    "MESSAGE": "Message",
+    "SELECT_TYPE": "Select Type",
+    "SELECT_REASON": "Select Reason"
+  },
+  "BUILDS": {
+    "CONTRIBUTORS": "Contributors",
+    "COMMITS": "Commits",
+    "BUILDS": "Builds"
+  },
+  "PROJECTS": {
+    "TITLE": "Projects"
+  },
+  "ANALYZE": {
+    "ENVIRONMENT_DETAILS": "Environment Details",
+    "ACTIVITY": "Activity",
+    "BUILDS": "Builds",
+    "SLA": "SLA",
+    "TRAFFIC": "Traffic"
+  },
+  "MANAGE": {
+    "SWAGGER": "Swagger",
+    "SECURITY": "Security",
+    "CONSUMERS": "Consumers",
+    "CONFIG_MANAGEMENT": "Config Management",
+    "CONFIG_MANAGEMENT_DESCRIPTION": "This is the config management page. It lets you... manage your config. You can set configs at your Project level, at your Repo level, or at the Environment level (dev, qa, prod). Nested configs have priority over others. For example, assuming you have <code>config.yaml</code> at <code>PROJ/repo</code> with <code>baseUrl=https://proj-DEV.thecloud.io</code>, and <code>config.yaml</code> at the <code>PROJ/repo/qa</code> level with <code>baseUrl=https://proj-QA.thecloud.io</code>. The <code>baseUrl</code> will be injected in your QA environment as <code>https://proj-QA.thecloud.io</code>."
+  },
+  "LOGIN": {
+    "PLEASE_LOGIN": "Please login to access Cloud's Console",
+    "CONTINUE_BUTTON": "Continue with Bitbucket"
+  },
+  "SIDEBAR": {
+    "HOME": "Home",
+    "SELF_SERVICE": "Self Service",
+    "MANAGE": "Manage",
+    "ANALYZE": "Analyze",
+    "ADMIN": "Admin",
+    "LEARN": "Learn"
+  },
+  "KUBERNETES": {
+    "SEARCH_PROJECTS": "Search projects..."
+  },
+  "WIDGETS_TITLE": {
+    "NODES_RESOURCES": "Resources",
+    "CLOUD_STATUS": "Status",
+    "BUDGET": "Budget",
+    "USERS": "Users <span class='text-muted text-xs'>(console)</span>",
+    "DEVELOPERS": "Developers",
+    "DEPLOYMENTS": "Deployments",
+    "NEWS": "News",
+    "NAMESPACE_RESOURCES": "Namespace Resources",
+    "NAMESPACE_DEPLOYMENTS": "Namespace Deployments",
+    "NAMESPACE_HEALTH": "Service Health",
+    "LATEST_BUILD": "Latest Build",
+    "CODE_QUALITY": "Code Quality"
+  },
+  "METRICS": {
+    "coverage": "Code coverage",
+    "ncloc": "Non-commented lines of code",
+    "duplicated_blocks": "Duplicated blocks",
+    "sqale_index": "Technical debt",
+    "sqale_rating": "Maintainability",
+    "reliability_rating": "Reliability",
+    "security_rating": "Security"
+  },
+  "CONSUL": {
+    "TO_CREATE_FOLDER": "To create a folder, end the key with",
+    "ANY_VALUE": "Value can be any format and length",
+    "NO_VALUE_NEEDED": "No value needed for nested keys.",
+    "INVALID_SECRET_KEY": "Key or nested keys can not start with a dot (.)",
+    "SELECT_PROJECT": "-- select project --",
+    "SELECT_REPOSITORY": "-- select repo --",
+    "SELECT_ENVIRONMENT": "-- select env --",
+    "CREATE": "Create",
+    "UPDATE": "Update",
+    "CANCEL": "Cancel",
+    "DELETE_KEY": "Delete key",
+    "DELETE_FOLDER": "Delete folder"
+  }
+}

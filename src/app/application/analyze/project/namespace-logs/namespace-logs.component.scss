@@ -1,0 +1,38 @@
+@import '../../../../../assets/styles/variables';
+
+tr {
+  font-weight: 100;
+  font-family: courier, monospace;
+  word-wrap: break-word;
+  white-space: nowrap;
+  width: 100%;
+
+  td {
+    border-top-color: darken($YP_DARK, 1%);
+    padding: 0 0 0 15px;
+
+    &:first-child {
+      color: $brand-info;
+    }
+  }
+
+  pre {
+    color: white;
+    margin: 5px auto;
+  }
+
+  &:hover {
+    background-color: darken($YP_DARK, 5%);
+  }
+
+  &.is-reference {
+    background-color: darken($YP_DARK, 5%);
+  }
+}
+
+:host /deep/ .highlight {
+  color: white;
+  padding: 1px 2px;
+  background-color: $YP_BLUE;
+  border-bottom: 1px solid white;
+}

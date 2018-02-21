@@ -1,0 +1,31 @@
+@import '../../assets/styles/variables';
+
+nav {
+  background-color: white;
+  border-bottom: 1px solid $YP_BORDER;
+}
+
+.profile-image {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin: -10px 5px -10px 0;
+}
+
+.user-menu {
+  .dropdown-menu {
+    margin-top: 7px;
+    z-index: 2147483647;  // max z-index :)
+  }
+
+  .profile-name:hover {
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.current-namespace {
+  font-weight: 100;
+  letter-spacing: 3px;
+  text-transform: lowercase;
+}

@@ -1,0 +1,51 @@
+<div class="bg-inverse h-100">
+  <div class="btn-logs w-75">
+    <div class="row">
+      <div class="col">
+        <div class="btn-logs-item">
+          <app-namespace-logs-search (search)="onSearch($event)"></app-namespace-logs-search>
+        </div>
+      </div>
+
+      <div class="pr-3">
+        <!-- follow logs -->
+        <app-live-button
+          class="btn-logs-item"
+          [isLive]="isLiveTail"
+          (liveChanged)="isLiveTail = !isLiveTail">
+        </app-live-button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-responsive table-inverse mb-0 w-100">
+    <tbody>
+    <!-- if loading top -->
+    <tr>
+      <td>
+        <app-loading [isLoading]="isLoadingTop"></app-loading>
+      </td>
+      <td></td>
+    </tr>
+
+    <tr *ngFor="let log of logs; trackBy: trackByLogId;"
+        id="{{log._id}}" class="px-3"
+        [class.is-reference]="log._id === scrollToViewLog"
+        [class.bg-danger]="log._id === erredLog">
+      <td>
+        <small>{{log._source['@timestamp'] | date:'MMM dd, yyyy, HH\'h\'mm:ss'}}</small>
+      </td>
+
+      <td (click)="log.prettyjson = !log.prettyjson ? 2 : 0" [class.cursor-hover]="log._source?.message_json">
+        <small *ngIf="log._source?.message"
+               [innerHTML]="log._source?.message | ansiToHtml | highlight:toHighlight | trustHtml"></small>
+
+        <small>
+          <pre *ngIf="log._source?.message_json"
+               [innerHTML]="log._source?.message_json | prettyjson:(log.prettyjson || 0) | highlight:toHighlight | trustHtml"></pre>
+        </small>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

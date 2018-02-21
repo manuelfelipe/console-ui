@@ -1,0 +1,50 @@
+@import '../../../assets/styles/variables';
+
+.submenu {
+  position: absolute;
+  background: white;
+  border-left: 1px solid $YP_BORDER;
+  height: calc(100% - 50px);
+  width: 80%;
+  z-index: 1;
+  transition: left 0.2s;
+
+  &--opened {
+    left: 60px;
+  }
+
+  &--closed {
+    left: 100%;
+  }
+
+  .submenu-title {
+    .btn {
+      padding: 17px;
+      width: 100%;
+    }
+
+    .submenu-title-close-icon {
+      position: absolute;
+      left: 10px;
+    }
+  }
+
+  .submenu-items .btn {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 100;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: 0;
+    text-align: left;
+
+    &.is-active {
+      background: $YP_LIGHT;
+      color: $YP_BLUE;
+    }
+
+    &:hover {
+      background-color: $YP_LIGHT;
+    }
+  }
+}

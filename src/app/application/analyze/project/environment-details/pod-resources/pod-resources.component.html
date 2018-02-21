@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div *ngFor="let resource of resources" class="col-md-6 px-0 mb-md-3" style="max-height: 150px;">
+      <div class="text-center">
+        {{resource.type | uppercase}}
+        <span *ngIf="resource.type === 'memory';">(in MB)</span>
+        <span *ngIf="resource.type === 'cpu'">(in cores)</span>
+
+        <app-loading [isLoading]="isLoading" [size]="'xs'" class="pull-right mr-3"></app-loading>
+      </div>
+
+      <ngx-charts-line-chart
+        [results]="resource.data"
+        [customColors]="clustersColors"
+        [xAxis]="true"
+        [yAxis]="true"
+        [autoScale]="true"
+        [legend]="false"
+        [showRefLines]="true"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="false"
+        [showGridLines]="true">
+      </ngx-charts-line-chart>
+    </div>
+  </div>
+</div>

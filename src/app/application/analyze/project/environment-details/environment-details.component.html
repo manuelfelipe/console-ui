@@ -1,0 +1,26 @@
+<div class="row mb-4">
+  <div class="col-12">
+    <app-namespace-health [namespace]="namespace"></app-namespace-health>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <app-latest-build [project]="project" [namespace]="namespace"></app-latest-build>
+  </div>
+  <div class="col-md-6 mb-4">
+    <app-code-quality [project]="project"></app-code-quality>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-12">
+    <app-namespace-deployments [namespace]="namespace"></app-namespace-deployments>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-12">
+    <app-namespace-resources [namespace]="namespace"></app-namespace-resources>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+@import '../../assets/styles/variables';
+
+.btn-bitbucket {
+  display: inline;
+  margin: 0 auto;
+  border-radius: 50px;
+  background-color: #FFFFFF;
+  border: 1px solid $BITBUCKET;
+  color: $BITBUCKET;
+
+  &:hover {
+    background-color: $BITBUCKET;
+    color: #FFFFFF;
+  }
+}

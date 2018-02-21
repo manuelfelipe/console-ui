@@ -1,0 +1,36 @@
+@import '../../../../../assets/styles/variables';
+
+.table-builds {
+  font-weight: 100;
+  margin-bottom: 0;
+
+  tr, td {
+    vertical-align: middle;
+  }
+
+  .build-time img {
+    height: 15px;
+  }
+}
+
+.badge-warning {
+  background-color: $YP_YELLOW_DARK !important;
+}
+
+.text-warning {
+  color: $YP_YELLOW_DARK !important;
+}
+
+.row-hover- {
+  &success:hover {
+    background-color: transparentize($YP_GREEN, 0.95);
+  }
+
+  &warning:hover {
+    background-color: transparentize($YP_YELLOW_DARK, 0.95);
+  }
+
+  &danger:hover {
+    background-color: transparentize($YP_RED, 0.95);
+  }
+}

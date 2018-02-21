@@ -1,0 +1,26 @@
+<ul class="list-unstyled">
+  <li *ngFor="let logsByProc of logsByProcs;">
+
+    <!-- Proc -->
+    <div class="proc px-4 py-3"
+         [class.collapsed]="isCollapsed[logsByProc.proc]"
+         (click)="isCollapsed[logsByProc.proc] = !isCollapsed[logsByProc.proc]">
+      <!-- Proc title -->
+      <span>{{logsByProc.proc}}</span>
+
+      <!-- Proc arrows -->
+      <span class="text-inverse float-right"
+            [ngClass]="{ 'icon-arrows-down': isCollapsed[logsByProc.proc], 'icon-arrows-up': !isCollapsed[logsByProc.proc] }"></span>
+    </div>
+
+    <!-- Proc logs -->
+    <ul id="collapse_{{logsByProc.proc}}" class="list-unstyled bg-inverse text-white logs p-4"
+        [ngbCollapse]="isCollapsed[logsByProc.proc]">
+      <li *ngFor="let log of logsByProc.logs;">
+        <span class="text-muted">{{log.pos}}</span>
+        <span [innerHTML]="log.out | ansiToHtml | trustHtml"></span>
+        <span class="text-muted float-right">{{log.time || 0}}s</span>
+      </li>
+    </ul>
+  </li>
+</ul>

@@ -1,0 +1,8 @@
+<button class="btn btn-xs btn-secondary"
+        ngxClipboard
+        [cbContent]="content"
+        (cbOnSuccess)="copySuccessful()"
+        [disabled]="!content">
+  <span *ngIf="isCopied"><fa [name]="'check'" class="text-success"></fa> copied!</span>
+  <span *ngIf="!isCopied"><span class="icon-basic-sheet-multiple"></span> copy</span>
+</button>

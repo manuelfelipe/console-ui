@@ -1,0 +1,162 @@
+<div class="card h-100 box-shadow">
+  <div class="card-block">
+
+    <div class="card-title">
+      <img src="../../../../../../assets/images/widgets/cube.svg" alt="Cube" height="35"/>
+      {{'WIDGETS_TITLE.NAMESPACE_DEPLOYMENTS' | translate}}
+
+      <!-- deploy locally -->
+      <span class="pull-right" *ngIf="localDeployment">
+        <button class="btn btn-link btn-sm"
+                (click)="openDeployLocallyModal()">
+          <span class="icon-basic-laptop"></span> Deploy locally</button>
+      </span>
+    </div>
+
+    <app-loading [isLoading]="isLoading"></app-loading>
+
+    <table class="table mb-0" *ngFor="let deploymentsByCluster of deploymentsByClusters;">
+      <thead *ngIf="deploymentsByCluster.deployments.length > 0">
+      <tr>
+        <td>
+          <img src="../../../../../../assets/images/environments/{{deploymentsByCluster.cluster}}.png"
+               alt="{{deploymentsByCluster.cluster}}" height="20"/>
+          <strong>{{deploymentsByCluster.cluster}}</strong>
+        </td>
+
+        <td colspan="15" class="text-right">
+          <app-namespace-events-button [cluster]="deploymentsByCluster.cluster"
+                                       [namespace]="namespace"></app-namespace-events-button>
+        </td>
+      </tr>
+      </thead>
+      <tbody *ngFor="let deployment of deploymentsByCluster.deployments;"
+             [hidden]="deploymentsByCluster.deployments.length === 0">
+      <tr>
+        <!-- Deployment Name -->
+        <td class="col-6">{{deployment.name}}</td>
+
+        <!-- Deployment Created At -->
+        <td class="col-2">
+          <span class="icon-basic-calendar"></span> {{deployment.createdAt | date:'mediumDate'}}
+        </td>
+
+        <!-- Deployment Replicas -->
+        <td class="col-3">
+          <app-scale-deployment [deployment]="deployment"
+                                [cluster]="deploymentsByCluster.cluster"
+                                [podsNumber]="deployment.pods?.length">
+          </app-scale-deployment>
+        </td>
+
+        <!-- Show Config Maps -->
+        <td class="col-1 text-right">
+          <button class="btn btn-xs btn-outline-primary bg-white"
+                  (click)="openConfigMapsModal(deploymentsByCluster.cluster, namespace)">
+            <span class="icon-basic-gear"></span>
+            {{'ACTIONS.SHOW_CONFIG_MAPS' | translate}}
+          </button>
+        </td>
+      </tr>
+
+      <!-- Deployment Pods -->
+      <tr *ngFor="let pod of deployment.pods;">
+
+        <!-- to nest another table, so each pod has its resources below it -->
+        <td colspan="15" class="py-0 border-0">
+          <table class="table table-sm table-pod-row mb-0">
+            <tbody>
+            <!-- Pod row -->
+            <tr>
+              <td class="col-6 pl-5">
+                <small class="badge badge-pill badge-container-state" [ngClass]="getStatusClass(pod.containerState)">
+                  {{ContainerState[pod.containerState] || '- unknown status -'}} <span *ngIf="pod.buildNumber">#{{pod.buildNumber}}</span>
+                </small>
+                <small>{{pod.name}}</small>
+
+                <!-- Number of restarts -->
+                <app-pod-restarts [pod]="pod"></app-pod-restarts>
+              </td>
+              <td class="col-2 pod-time">
+                <small class="pod-time-date icon-basic-calendar"> {{pod.createdAt | date:'MMM dd, yy HH:mm'}}</small>
+                <small class="pod-time-timeAgo icon-basic-clessidre"> {{pod.createdAt | amTimeAgo}}</small>
+              </td>
+              <td class="col-3">
+                <div class="btn-group">
+                  <!-- View Metrics -->
+                  <button class="btn btn-xs btn-outline-primary bg-white"
+                          (click)="isCollapsed[pod.uid] = !isCollapsed[pod.uid]">
+                    <span class="icon-basic-accelerator"></span> Metrics
+                  </button>
+
+                  <!-- View Logs -->
+                  <button class="btn btn-xs btn-outline-primary bg-white"
+                          *ngIf="pod.containers?.length === 1"
+                          (click)="openLogsWindow(deploymentsByCluster.cluster, namespace, pod.name, pod.containers[0])">
+                    <span class="icon-basic-sheet-txt"></span> Logs
+                  </button>
+
+                  <div class="btn-group" ngbDropdown *ngIf="pod.containers?.length > 1">
+                    <button class="btn btn-xs btn-outline-primary bg-white" ngbDropdownToggle>
+                      <span class="icon-basic-sheet-txt"></span> Logs
+                    </button>
+
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                      <button class="dropdown-item"
+                              *ngFor="let container of pod.containers"
+                      (click)="openLogsWindow(deploymentsByCluster.cluster, namespace, pod.name, container)">{{container}}
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- View previous logs, if restartCount > 0 -->
+                  <button class="btn btn-xs btn-outline-warning bg-white"
+                          *ngIf="pod?.restartCount > 0 && pod.containers?.length === 1"
+                          (click)="openLogsWindow(deploymentsByCluster.cluster, namespace, pod.name, pod.containers[0], true)">
+                    <span class="icon-arrows-anticlockwise-dashed"></span> Previous Logs
+                  </button>
+
+                  <div class="btn-group" ngbDropdown *ngIf="pod?.restartCount > 0 && pod.containers?.length > 1">
+                    <button class="btn btn-xs btn-outline-warning bg-white" ngbDropdownToggle>
+                      <span class="icon-arrows-anticlockwise-dashed"></span> Previous Logs
+                    </button>
+
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                      <button class="dropdown-item"
+                              *ngFor="let container of pod.containers"
+                              (click)="openLogsWindow(deploymentsByCluster.cluster, namespace, pod.name, container, true)">{{container}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-1 text-right">
+                <button class="btn btn-xs btn-outline-danger bg-white"
+                        (click)="terminatePod(deploymentsByCluster.cluster, pod.namespace, pod.name)">
+                  <small class="icon-basic-ban"></small>
+                  {{'ACTIONS.TERMINATE' | translate}}
+                </button>
+              </td>
+            </tr>
+
+            <!-- Pod resources -->
+            <tr>
+              <td colspan="15" class="px-0 border-0" [class.py-3]="isCollapsed[pod.uid]">
+                <!-- on <div>, since placing ngbCollapse on table elements breaks everything -->
+                <div *ngIf="isCollapsed[pod.uid]">
+                  <app-pod-resources
+                    [cluster]="deploymentsByCluster.cluster"
+                    [namespace]="namespace"
+                    [pod]="pod.name"></app-pod-resources>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

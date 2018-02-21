@@ -1,0 +1,25 @@
+<div class="d-inline-block">
+  <!-- since date-picker -->
+  <div class="d-inline-block">
+    <div class="input-group input-group-sm">
+      <input class="form-control" placeholder="since (yyyy-mm-dd)"
+             [ngModel]="sinceDatePicker" (ngModelChange)="sinceDatePickerChanged($event)"
+             ngbDatepicker #since="ngbDatepicker">
+      <button type="button" class="input-group-addon" (click)="since.toggle()">
+        <span class="icon-basic-calendar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- to date-picker -->
+  <div class="d-inline-block">
+    <div class="input-group input-group-sm">
+      <input class="form-control" placeholder="to (yyyy-mm-dd)"
+             [ngModel]="toDatePicker" (ngModelChange)="toDatePickerChanged($event)"
+             ngbDatepicker #to="ngbDatepicker">
+      <button type="button" class="input-group-addon" (click)="to.toggle()">
+        <span class="icon-basic-calendar"></span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+@import '../../../../../../../assets/styles/variables';
+
+.proc {
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.collapsed {
+    border-bottom: 1px solid $YP_BORDER;
+  }
+}
+
+.logs {
+  font-family: 'Courier', monospace;
+  font-weight: 100;
+  font-size: 12px;
+}

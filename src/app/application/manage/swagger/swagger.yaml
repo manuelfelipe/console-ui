@@ -1,0 +1,267 @@
+SWAGGER swagger: '2.0'
+info:
+    version: 1.0.0
+    title: ""
+    description: "Description"
+    contact:
+        name: 'Mark Massoud'
+        url: 'https://thecloud.io'
+        email: mark.massoud@pj.ca
+host: dev-api.thecloud.io
+schemes:
+    - https
+consumes:
+    - application/json
+produces:
+    - application/json
+paths:
+    /uptimes:
+        get:
+            tags:
+                - uptime
+            summary: 'Get All Uptimes, or Namespace''s'
+            description: 'Get All Uptimes, or Namespace''s'
+            operationId: uptimes
+            parameters:
+                -
+                    name: uptimeId
+                    in: query
+                    description: 'Uptime''s ID'
+                    required: false
+                    type: string
+                -
+                    name: category
+                    in: query
+                    description: 'Category (infra, ns, etc)'
+                    required: false
+                    type: string
+                -
+                    name: kind
+                    in: query
+                    description: 'Kind (Mongo, Elasticsearch, Ingress, etc)'
+                    required: false
+                    type: string
+                -
+                    name: namespace
+                    in: query
+                    description: Namespace
+                    required: false
+                    type: string
+                -
+                    name: interval
+                    in: query
+                    description: 'Interval, daily|weekly|monthly'
+                    required: true
+                    type: string
+                -
+                    name: since
+                    in: query
+                    description: 'Since date, in unix'
+                    required: true
+                    type: number
+                -
+                    name: to
+                    in: query
+                    description: 'To date, in unix'
+                    required: true
+                    type: number
+            responses:
+                '200':
+                    description: 'successful operation'
+                    schema:
+                        type: object
+                        properties:
+                            result:
+                                type: boolean
+                                description: 'true if is a valid response.'
+                            data:
+                                type: object
+                                properties:
+                                    isDataEmpty:
+                                        type: boolean
+                                    data:
+                                        type: object
+                        required:
+                            - result
+                            - data
+                '404':
+                    description: 'Not found'
+                default:
+                    description: 'Unexpected error'
+    /downtimes:
+        get:
+            tags:
+                - downtime
+            summary: 'Get All Namespace''s Downtimes'
+            description: 'Get All Namespace''s Downtimes'
+            operationId: downtimes
+            parameters:
+                -
+                    name: uptimeId
+                    in: query
+                    description: 'Uptime''s ID'
+                    required: false
+                    type: string
+                -
+                    name: category
+                    in: query
+                    description: 'Category (infra, ns, etc)'
+                    required: false
+                    type: string
+                -
+                    name: namespace
+                    in: query
+                    description: Namespace
+                    required: false
+                    type: string
+                -
+                    name: kind
+                    in: query
+                    description: 'Kind (Mongo, Elasticsearch, Ingress, etc)'
+                    required: false
+                    type: string
+                -
+                    name: since
+                    in: query
+                    description: 'Since date, in unix'
+                    required: true
+                    type: number
+                -
+                    name: to
+                    in: query
+                    description: 'To date, in unix'
+                    required: true
+                    type: number
+            responses:
+                '200':
+                    description: 'successful operation'
+                    schema:
+                        type: object
+                        properties:
+                            result:
+                                type: boolean
+                                description: 'true if is a valid response.'
+                            data:
+                                type: object
+                                properties:
+                                    isDataEmpty:
+                                        type: boolean
+                                    data:
+                                        type: object
+                        required:
+                            - result
+                            - data
+                '404':
+                    description: 'Not found'
+                default:
+                    description: 'Unexpected error'
+    /sla:
+        get:
+            tags:
+                - downtime
+            summary: 'Get Namespace''s SLA'
+            description: 'Get Namespace''s SLA'
+            operationId: sla
+            parameters:
+                -
+                    name: uptimeId
+                    in: query
+                    description: 'Uptime''s ID'
+                    required: false
+                    type: string
+                -
+                    name: category
+                    in: query
+                    description: 'Category (infra, ns, etc)'
+                    required: false
+                    type: string
+                -
+                    name: kind
+                    in: query
+                    description: 'Kind (Mongo, Elasticsearch, Ingress, etc)'
+                    required: false
+                    type: string
+                -
+                    name: namespace
+                    in: query
+                    description: Namespace
+                    required: false
+                    type: string
+                -
+                    name: kind
+                    in: query
+                    description: 'Kind (Mongo, Elasticsearch, etc)'
+                    required: false
+                    type: string
+                -
+                    name: since
+                    in: query
+                    description: 'Since date, in unix'
+                    required: true
+                    type: number
+                -
+                    name: to
+                    in: query
+                    description: 'To date, in unix'
+                    required: true
+                    type: number
+            responses:
+                '200':
+                    description: 'successful operation'
+                    schema:
+                        type: object
+                        properties:
+                            result:
+                                type: boolean
+                                description: 'true if is a valid response.'
+                            data:
+                                type: object
+                                properties:
+                                    isDataEmpty:
+                                        type: boolean
+                                    data:
+                                        type: object
+                        required:
+                            - result
+                            - data
+                '404':
+                    description: 'Not found'
+                default:
+                    description: 'Unexpected error'
+    /infras:
+        get:
+            tags:
+                - infra
+            summary: 'Get Infra''s Uptimes'
+            description: 'Get Infra''s Uptimes'
+            operationId: infra
+            parameters:
+                -
+                    name: kind
+                    in: query
+                    description: 'Kind (Mongo, Elasticsearch, Ingress, etc)'
+                    required: false
+                    type: string
+            responses:
+                '200':
+                    description: 'successful operation'
+                    schema:
+                        type: object
+                        properties:
+                            result:
+                                type: boolean
+                                description: 'true if is a valid response.'
+                            data:
+                                type: object
+                                properties:
+                                    isDataEmpty:
+                                        type: boolean
+                                    data:
+                                        type: object
+                        required:
+                            - result
+                            - data
+                '404':
+                    description: 'Not found'
+                default:
+                    description: 'Unexpected error'

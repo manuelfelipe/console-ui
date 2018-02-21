@@ -1,0 +1,13 @@
+<div class="btn-group btn-group-sm mb-2">
+  <button class="btn"
+          [ngClass]="(language == 'fr') ? 'btn-primary' : 'btn-secondary'"
+          (click)="selectLanguage('fr')">
+    Français
+  </button>
+
+  <button class="btn"
+          [ngClass]="(language == 'en') ? 'btn-primary' : 'btn-secondary'"
+          (click)="selectLanguage('en')">
+    English
+  </button>
+</div>

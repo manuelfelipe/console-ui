@@ -1,0 +1,9 @@
+.card-header {
+  &.card-collapsed {
+    border-bottom: none;
+  }
+
+  .badge {
+    margin-top: 3px;
+  }
+}

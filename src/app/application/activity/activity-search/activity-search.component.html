@@ -1,0 +1,47 @@
+Search:
+
+<form class="form-group" [formGroup]="formGroup" (ngSubmit)="onSearch()" novalidate>
+  <div class="row">
+    <!-- Namespace, disabled if in namespace contextual page -->
+    <div class="col" *ngIf="!isNamespaceDisabled">
+      <div class="form-group">
+        <label for="namespace" class="sr-only">Namespace</label>
+        <input id="namespace" class="form-control form-control-sm" formControlName="namespace" placeholder="namespace">
+      </div>
+    </div>
+
+    <!-- user -->
+    <div class="col">
+      <div class="form-group">
+        <label for="user" class="sr-only">User</label>
+        <input id="user" class="form-control form-control-sm" formControlName="user" placeholder="user">
+      </div>
+    </div>
+
+    <!-- since -->
+    <div class="col">
+      <div class="input-group input-group-sm">
+        <input class="form-control" placeholder="since (yyyy-mm-dd)"
+               formControlName="since" ngbDatepicker #since="ngbDatepicker">
+        <button type="button" class="input-group-addon" (click)="since.toggle()">
+          <span class="icon-basic-calendar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- to -->
+    <div class="col">
+      <div class="input-group input-group-sm">
+        <input class="form-control" placeholder="to (yyyy-mm-dd)"
+               formControlName="to" ngbDatepicker #to="ngbDatepicker">
+        <button type="button" class="input-group-addon" (click)="to.toggle()">
+          <span class="icon-basic-calendar"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-1">
+      <button class="btn btn-sm btn-secondary">Search</button>
+    </div>
+  </div>
+</form>

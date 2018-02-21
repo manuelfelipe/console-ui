@@ -1,0 +1,40 @@
+<div class="card card-outline-{{erred ? 'danger' : 'info'}} mb-5" style="font-weight: lighter;">
+
+  <div class="card-block">
+    <app-loading [isLoading]="isLoading"></app-loading>
+
+    <div *ngIf="erred" class="text-danger">
+      <span class="icon-basic-exclamation"></span>
+      <strong *ngIf="namespace">{{namespace}}</strong>
+      <span *ngIf="!namespace">This service</span>
+      <span>has no API Gateway associated to it.</span>
+    </div>
+
+    <div *ngIf="api">
+      <!-- Namespace, if not the same as API's name -->
+      <div *ngIf="api.name !== namespace">Namespace: {{namespace}}</div>
+
+      <!-- Name -->
+      <div><strong>API Name:</strong> {{api.name}}</div>
+
+      <!-- Upstream URL -->
+      <div><strong>Upstream URL:</strong> {{api.upstreamUrl}}</div>
+
+      <!-- Hosts -->
+      <div *ngIf="api.hosts && api.hosts.length > 0">
+        <strong>Host:</strong> {{api.hosts[0]}}<span *ngIf="api.uris && api.uris.length > 0">{{api.uris[0]}}</span>
+      </div>
+
+      <!-- id -->
+      <div class="text-right text-muted">
+        <div>
+          <small>#{{api.id}}</small>
+        </div>
+        <div style="margin-top: -10px;">
+          <small>created on {{api.createdAt | date:'shortDate'}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

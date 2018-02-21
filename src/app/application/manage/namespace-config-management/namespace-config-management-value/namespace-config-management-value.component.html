@@ -1,0 +1,58 @@
+<div class="config-wrapper">
+  <div class="mb-3">
+    <div class="input-group" [class.has-warning]="isSecretKey()">
+      <span class="input-group-addon">
+        <span class="icon-basic-folder">
+          <span *ngIf="!selectedKey?.startsWith('/')">/</span> {{selectedKey}}</span>
+        </span>
+      <!-- Config Key -->
+      <input title=""
+             id="newKey"
+             class="form-control"
+             [class.form-control-warning]="isSecretKey()"
+             [(ngModel)]="newKey"
+             *ngIf="isFolderUtil(selectedKey)"
+             [disabled]="!isFolderUtil(selectedKey)">
+    </div>
+    <small class="text-muted" *ngIf="!isSecretKey()">{{'CONSUL.TO_CREATE_FOLDER' | translate}} <code>/</code></small>
+
+    <!-- warning message if secret key-->
+    <small class="text-warning" *ngIf="isSecretKey()">
+      {{'CONSUL.INVALID_SECRET_KEY' | translate}}
+    </small>
+  </div>
+
+  <!-- Config Value -->
+  <div *ngIf="!isFolderUtil(newKey)">
+    <ace-editor
+      #editor
+      [(text)]="config"
+      [mode]="getAceMode()"
+      [theme]="aceTheme"
+      style="height:250px;">
+    </ace-editor>
+    <small class="text-muted">{{'CONSUL.ANY_VALUE' | translate}}</small>
+  </div>
+
+  <div *ngIf="isFolderUtil(newKey)">
+    {{'CONSUL.NO_VALUE_NEEDED' | translate}}
+  </div>
+
+  <hr/>
+
+  <div>
+    <!-- CREATE/UPDATE -->
+    <button class="btn btn-outline-success"
+            (click)="setConfig(config)"
+            [disabled]="(isFolderUtil(selectedKey) && !newKey) || isSecretKey()">
+      {{(isFolderUtil(selectedKey) ? 'CONSUL.CREATE' : 'CONSUL.UPDATE') | translate}}
+    </button>
+
+    <!-- DELETE -->
+    <button class="btn btn-outline-danger float-right"
+            (click)="deleteSelectedKey()"
+            *ngIf="!isProjectUtil(selectedKey) && !isRepositoryUtil(selectedKey)">
+      {{(isFolderUtil(selectedKey) ? 'CONSUL.DELETE_FOLDER' : 'CONSUL.DELETE_KEY') | translate}}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<button type="button" class="btn btn-xs btn-secondary"
+        (click)="scaleDeploymentDown()"
+        [disabled]="podsNumber === 0">
+  <span class="icon-arrows-down-double"></span>
+</button>
+
+<small class="pods-number">
+  {{podsNumber}} pod<span [hidden]="podsNumber <= 1">s</span>
+</small>
+
+<button type="button" class="btn btn-xs btn-secondary" (click)="scaleDeploymentUp()">
+  <span class="icon-arrows-up-double-33"></span>
+</button>

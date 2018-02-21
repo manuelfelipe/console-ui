@@ -1,0 +1,94 @@
+<app-header></app-header>
+
+<ng-sidebar-container>
+
+  <ng-sidebar [(opened)]="isSidebarOpen" mode="push" [dock]="true" dockedSize="60px" [keyClose]="true"
+              (onCloseStart)="isSubmenuOpen = false;">
+
+    <!-- Sidebar's menu -->
+    <div class="sidebar-menu">
+      <!-- HOME -->
+      <button class="btn bg-transparent"
+              placement="right" container="body"
+              ngbTooltip="{{isSidebarOpen ? null : ('SIDEBAR.HOME' | translate)}}"
+              (click)="openSubmenu('home')"
+              [class.is-active]="submenuContent === 'home'">
+        <span class="sidebar-menu-icon icon-basic-home"></span> {{'SIDEBAR.HOME' | translate}}
+      </button>
+
+      <!-- SELF-SERVE -->
+      <button class="btn bg-transparent"
+              placement="right" container="body"
+              ngbTooltip="{{isSidebarOpen ? null : ('SIDEBAR.SELF_SERVICE' | translate)}}"
+              (click)="openSubmenu('self_service')"
+              [class.is-active]="submenuContent === 'self_service'">
+        <span class="sidebar-menu-icon icon-basic-settings"></span> {{'SIDEBAR.SELF_SERVICE' | translate}}
+      </button>
+
+      <!-- MANAGE -->
+      <button class="btn bg-transparent"
+              placement="right" container="body"
+              ngbTooltip="{{isSidebarOpen ? null : ('SIDEBAR.MANAGE' | translate)}}"
+              (click)="openSubmenu('manage')"
+              [class.is-active]="submenuContent === 'manage'">
+        <span class="sidebar-menu-icon icon-basic-paperplane"></span> {{'SIDEBAR.MANAGE' | translate}}
+      </button>
+
+      <!-- ANALYZE -->
+      <button class="btn bg-transparent"
+              placement="right" container="body"
+              ngbTooltip="{{isSidebarOpen ? null : ('SIDEBAR.ANALYZE' | translate)}}"
+              (click)="openSubmenu('analyze')"
+              [class.is-active]="submenuContent === 'analyze'">
+        <span class="sidebar-menu-icon icon-basic-share"></span> {{'SIDEBAR.ANALYZE' | translate}}
+      </button>
+
+      <!-- ADMIN -->
+      <button class="btn bg-transparent"
+              placement="right" container="body"
+              ngbTooltip="{{isSidebarOpen ? null : ('SIDEBAR.ADMIN' | translate)}}"
+              (click)="submenuContent = 'admin'"
+              [routerLink]="['/admin']"
+              [class.is-active]="submenuContent === 'admin'">
+        <span class="sidebar-menu-icon icon-basic-gear"></span> {{'SIDEBAR.ADMIN' | translate}}
+      </button>
+
+      <!-- LEARN -->
+      <button class="btn bg-transparent"
+              placement="right" container="body"
+              ngbTooltip="{{isSidebarOpen ? null : ('SIDEBAR.LEARN' | translate)}}"
+              (click)="submenuContent = 'learn'"
+              [routerLink]="['/learn']"
+              [class.is-active]="submenuContent === 'learn'">
+        <span class="sidebar-menu-icon icon-basic-notebook-pencil"></span> {{'SIDEBAR.LEARN' | translate}}
+      </button>
+    </div>
+
+    <!-- SubMenu -->
+    <app-sidebar-submenu [opened]="isSubmenuOpen" [submenuContent]="submenuContent"
+                         (openedChange)="onSubmenuOpenedChange($event)"></app-sidebar-submenu>
+
+    <!--<img-->
+      <!--[src]="isSidebarOpen ? '../../../assets/images/brand/thecloud-console.png' : '../../../assets/images/brand/thecloud-logo.png'"-->
+      <!--alt="TheCloud Dashboard"-->
+      <!--class="thecloud-logo"/>-->
+
+  </ng-sidebar>
+
+  <section class="application-fluid" ng-sidebar-content>
+    <!-- toggle sidebar button -->
+    <button class="toggle-sidebar-button" (click)="toggleSidebar()">
+      <img [class.rotateRight]="!isSidebarOpen" src="../../assets/images/menu/arrow_circle_left.svg" alt="Toggle"/>
+    </button>
+
+    <div class="container-fluid mx-5">
+      <div class="row">
+        <!-- alerts, from Consul -->
+        <app-alerts></app-alerts>
+
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </section>
+
+</ng-sidebar-container>

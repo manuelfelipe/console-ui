@@ -1,0 +1,29 @@
+<div class="container py-3">
+
+  <h4 *ngIf="cronjob" class="text-center mb-3">{{cronjob?.name}} SiteSpeed Reports</h4>
+
+  <div class="input-group mb-3">
+    <input class="form-control" placeholder="filter by date (yyyy-mm-dd)"
+           [ngModel]="date" (ngModelChange)="onDateSelect($event)" ngbDatepicker #datePicker="ngbDatepicker">
+    <button type="button" class="input-group-addon" (click)="datePicker.toggle()">
+      <span class="icon-basic-calendar"></span>
+    </button>
+  </div>
+
+  <div *ngFor="let reportGroup of reports | objectToArray; let isLastReportGroup = last;">
+
+    <strong>{{reportGroup.key}}</strong>
+    <br/>
+
+    <span *ngFor="let report of reportGroup.value; let isLastReport = last;">
+      <a [href]="report.url" target="_blank">{{report.date | date:'HH:mm'}}</a>
+      <span *ngIf="!isLastReport">|</span>
+    </span>
+
+    <hr *ngIf="!isLastReportGroup"/>
+  </div>
+
+  <div class="text-muted" *ngIf="(reports | objectToArray).length === 0">
+    No reports found... :(
+  </div>
+</div>

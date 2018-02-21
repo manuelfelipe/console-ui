@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-6 mt-2">
+    <h4>
+      <img src="../../../../assets/icons/swagger-icon.svg" alt="{...}" height="30">
+      {{'HOME.API_CATALOG' | translate}}
+    </h4>
+  </div>
+
+  <div class="ml-auto col-6">
+    <app-api-catalog-search (search)="onSearch($event)"></app-api-catalog-search>
+  </div>
+</div>
+
+<hr/>
+<br/>
+
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div class="text-center" *ngIf="!isLoading && apis.length === 0">
+  No APIs found, please try again :)
+</div>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let api of apis;">
+    <div class="swagger-block d-flex flex-column text-center px-5">
+
+      <!-- serviceGroup, serviceName -->
+      <div class="swagger-info text-nowrap d-flex">
+        <div class="mt-auto">
+          <div class="swagger-info-title">
+          <span class="clearfix" *ngIf="api.serviceGroup || api.serviceName">
+            {{api.serviceGroup | uppercase}}
+            <span *ngIf="api.serviceGroup && api.serviceName"> / </span>
+            {{api.serviceName | uppercase}}
+          </span>
+
+            <div *ngIf="!api.serviceGroup && !api.serviceName">
+              <span class="text-muted">---</span>
+            </div>
+          </div>
+
+          <!-- repo, or namespace when hovered -->
+          <div class="text-muted" style="font-size: 10px;">
+            <div class="swagger-info-repo">
+              <fa [name]="'bitbucket'" [fw]="true" class="bitbucket"></fa>
+              {{api.repo?.owner}}/{{api.repo?.name}}
+
+            </div>
+
+            <!-- namespace -->
+            <div class="swagger-info-namespace">
+              {{api.namespace}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- swagger ellipsis -->
+      <div class="swagger-ellipsis">
+        <!-- ellipsis, if not hovered on -->
+        <span>...</span>
+
+        <!-- btn, if hovered on -->
+        <a class="btn btn-sm btn-outline-secondary btn-swagger" [routerLink]="['./', api.namespace]">
+          <img src="../../../../assets/icons/swagger-icon.svg" alt="{...}" height="25" style="margin-top: -3px;">
+          View Swagger Spec
+        </a>
+      </div>
+
+      <!-- spec description -->
+      <div>
+        <div class="swagger-description">
+          <p class="text-muted mb-0">
+            <strong *ngIf="api.info?.title">{{api.info?.title}}:</strong>
+            {{api.info?.description}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

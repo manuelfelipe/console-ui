@@ -1,0 +1,278 @@
+@import 'assets/styles/variables';
+@import 'assets/styles/overrides';
+@import '../node_modules/bootstrap/scss/bootstrap';
+// Icons
+@import 'assets/icons/_arrows/_ICONFONT/styles.css';
+@import 'assets/icons/_basic/_ICONFONT/styles.css';
+
+html, body {
+  height: 100%;
+  // padding-top: 60px;
+}
+
+.application-fluid {
+  margin-top: 100px;
+}
+
+.section-title {
+  color: $YP_BLUE;
+  font-size: 18px;
+  font-weight: lighter;
+  margin-top: -25px;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.text-xs {
+  font-size: 9px;
+  font-weight: 100;
+}
+
+.btn {
+  font-weight: 100;
+}
+
+button:focus, button:active {
+  outline: none !important;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.cursor-hover:hover {
+  cursor: pointer;
+}
+
+.table {
+  font-weight: 100;
+
+  td {
+    vertical-align: middle;
+  }
+}
+
+.table-hover tbody tr:hover {
+  background-color: $YP_LIGHT;
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 300px;
+  overflow-x: hidden;
+}
+
+.fa-o .fa:before {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: $YP_DARK;
+  color: transparent;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.text-inverse {
+  color: $YP_DARK;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.box-shadow {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bitbucket {
+  color: $BITBUCKET;
+}
+
+.tab-content {
+  margin: 20px auto;
+}
+
+.btn:focus,
+.btn.focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.list-group.list-group-sm li {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.btn-xs {
+  @include button-size(.12rem, .50rem, $font-size-xs, .1rem);
+}
+
+.btn-rounded {
+  border-radius: 25px;
+}
+
+.badge {
+  font-weight: 100;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.card-text-content {
+  font-size: 14px;
+  color: gray;
+}
+
+.list-group-item {
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  vertical-align: middle;
+}
+
+// Animations
+.spin {
+  display: inline-block;
+  line-height: normal;
+  animation: spin 2s linear infinite;
+}
+
+// Loader
+.loader {
+  border: 2px solid $YP_LIGHT;
+  border-top-color: $YP_BLUE;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+  margin-bottom: 1.25rem;
+}
+
+.card-status {
+  &-success {
+    border-top: 4px solid $YP_GREEN;
+  }
+
+  &-warning {
+    border-top: 4px solid $YP_YELLOW_DARK;
+  }
+
+  &-danger {
+    border-top: 4px solid $YP_RED;
+  }
+}
+
+.cluster-container {
+  border: 1px solid $YP_LIGHT;
+  border-radius: $BORDER_RADIUS;
+  padding: 5px;
+
+  .cluster-title {
+    color: #FFFFFF;
+    border-radius: $BORDER_RADIUS;
+    padding: 5px auto;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  // .cluster-container-aws/.cluster-container-gce...
+  &-aws {
+    border-color: $AWS;
+
+    .cluster-title {
+      background-color: $AWS;
+    }
+  }
+  &-gce {
+    border-color: $GCE;
+
+    .cluster-title {
+      background-color: $GCE;
+    }
+  }
+  &-azure {
+    border-color: $AZURE;
+
+    .cluster-title {
+      background-color: $AZURE;
+    }
+  }
+}
+
+.btn-logs {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+
+  .btn-logs-item {
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .btn {
+    background-color: darken($YP_DARK, 5%);
+    font-weight: bold;
+    color: white;
+
+    [class^="icon-"]:before, [class*=" icon-"]:before {
+      font-weight: bold !important;
+    }
+  }
+
+  input {
+    border: 1px solid #ccc;
+  }
+}
+
+// for the highlight pipe
+.highlight {
+  color: $YP_YELLOW;
+}
+
+// for PrettyJson classes
+pre span {
+  white-space: normal;
+}
+
+.string {
+  color: $brand-success;
+}
+
+.number {
+  color: $brand-warning;
+}
+
+.boolean {
+  color: $brand-primary;
+}
+
+.null {
+  color: $gray-dark;
+}
+
+.key {
+  color: $brand-danger;
+}
+
+// end of PrettyJson classes

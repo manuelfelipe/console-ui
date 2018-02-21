@@ -1,0 +1,122 @@
+{
+  "NA": "N/D",
+  "HEADER": {
+    "LOGOUT": "Se déconnecter"
+  },
+  "HOME": {
+    "DASHBOARD": "Aperçu",
+    "ACTIVITY": "Activité",
+    "API_CATALOG": "Catalogue d'API",
+    "SLA": "SLA",
+    "STATUS": "Status",
+    "TRAFFIC": "Trafic"
+  },
+  "SELF_SERVICE": {
+    "SITESPEED_JOBS": "Tâches SiteSpeed",
+    "PROVISIONS": "Approvisionnement"
+  },
+  "ACTIONS": {
+    "VIEW_LOGS": "Voir les Logs",
+    "SHOW_CONFIG_MAPS": "Voir Config",
+    "FOLLOW": "Suivre",
+    "TERMINATE": "Terminer",
+    "RESTART": "Redémarrer",
+    "RESTARTED": "Redémarré",
+    "STOP": "Arrêter",
+    "READ_MORE": "Lire plus",
+    "READ_LESS": "Lire moins",
+    "ENABLE": "Activer",
+    "DISABLE": "Désactiver",
+    "CREATE": "Créer",
+    "UPDATE": "Mettre à jour",
+    "DELETE": "Supprimer",
+    "DOWNLOAD": "Télécharger",
+    "REQUIRED_FIELD": "Champ obligatoire"
+  },
+  "EVENT": {
+    "EVENTS": "Événements",
+    "WARNING": "Alerte",
+    "TYPE": "Type",
+    "LAST_SEEN": "Dernière Vue",
+    "FIRST_SEEN": "Première Vue",
+    "COUNT": "Compte",
+    "REASON": "Raison",
+    "MESSAGE": "Message",
+    "SELECT_TYPE": "Choisir Type",
+    "SELECT_REASON": "Choisir Raison"
+  },
+  "BUILDS": {
+    "CONTRIBUTORS": "Contributeurs",
+    "COMMITS": "Commis",
+    "BUILDS": "Buildes"
+  },
+  "PROJECTS": {
+    "TITLE": "Projets"
+  },
+  "ANALYZE": {
+    "ENVIRONMENT_DETAILS": "Détails de l'environnement",
+    "ACTIVITY": "Activité",
+    "BUILDS": "Buildes",
+    "SLA": "SLA",
+    "TRAFFIC": "Trafic"
+  },
+  "MANAGE": {
+    "SWAGGER": "Swagger",
+    "SECURITY": "Sécurité",
+    "CONSUMERS": "Utilisateurs",
+    "CONFIG_MANAGEMENT": "Gestion des configurations",
+    "CONFIG_MANAGEMENT_DESCRIPTION": "Ceci est la page de gestion des configurations. Vous pouvez y... gérer vos configurations. Vous pouvez définir vos configuration au niveau du Projet, du Répertoire, et de l'Environnement (dev, qa, prod). Les configurations imbriquées ont priorité sur les autres. Par exemple, assumez <code>config.yaml</code> au niveau <code>PROJ/repo</code> avec <code>baseUrl=https://proj-DEV.thecloud.io</code>, et <code>config.yaml</code> au niveau <code>PROJ/repo/qa</code> avec <code>baseUrl=https://proj-QA.thecloud.io</code>. La variable <code>baseUrl</code> sera injectée dans votre environnement QA avec la valeur <code>https://proj-QA.thecloud.io</code>."
+  },
+  "LOGIN": {
+    "PLEASE_LOGIN": "Veuillez vous authentifier pour accéder au Cloud Console",
+    "CONTINUE_BUTTON": "Continuer avec Bitbucket"
+  },
+  "SIDEBAR": {
+    "HOME": "Accueil",
+    "SELF_SERVICE": "Libre Service",
+    "MANAGE": "Gérer",
+    "ANALYZE": "Analyser",
+    "ADMIN": "Administrateur",
+    "LEARN": "Apprendre"
+  },
+  "KUBERNETES": {
+    "SEARCH_PROJECTS": "Chercher projets..."
+  },
+  "WIDGETS_TITLE": {
+    "NODES_RESOURCES": "Ressources",
+    "CLOUD_STATUS": "Status",
+    "BUDGET": "Budget",
+    "USERS": "Utilisateurs <span class='text-muted text-xs'>(console)</span>",
+    "DEVELOPERS": "Développeurs",
+    "DEPLOYMENTS": "Déploiements",
+    "NEWS": "Nouvelles",
+    "NAMESPACE_RESOURCES": "Ressources du Namespace",
+    "NAMESPACE_DEPLOYMENTS": "Déploiements du Namespace",
+    "NAMESPACE_HEALTH": "Status du Service",
+    "LATEST_BUILD": "Dernier Builde",
+    "CODE_QUALITY": "Qualité du Code"
+  },
+  "METRICS": {
+    "coverage": "Couverture de code",
+    "ncloc": "Lignes de code non-commentées",
+    "duplicated_blocks": "Blocs dupliqués",
+    "sqale_index": "Dette technique",
+    "sqale_rating": "Maintenabilité",
+    "reliability_rating": "Fiabilité",
+    "security_rating": "Sécurité"
+  },
+  "CONSUL": {
+    "TO_CREATE_FOLDER": "Pour créer un dossier, terminer la clé avec un ",
+    "ANY_VALUE": "La valeur peut être de tout format et longueur",
+    "NO_VALUE_NEEDED": "Aucune valeur nécessaire pour les clés imbriquées.",
+    "INVALID_SECRET_KEY": "La clé ou les clés imbriquées ne peuvent commencer avec un point (.)",
+    "SELECT_PROJECT": "- choisir projet -",
+    "SELECT_REPOSITORY": "- choisir repo -",
+    "SELECT_ENVIRONMENT": "- choisir env -",
+    "CREATE": "Créer",
+    "UPDATE": "Mettre à jour",
+    "CANCEL": "Annuler",
+    "DELETE_KEY": "Supprimer la clé",
+    "DELETE_FOLDER": "Supprimer le dossier"
+  }
+}

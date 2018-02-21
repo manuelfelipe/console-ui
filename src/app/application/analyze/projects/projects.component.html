@@ -1,0 +1,29 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div class="card" *ngFor="let projectsByRepo of projectsByRepos;">
+  <div class="card-header cursor-hover" (click)="isCollapsed[projectsByRepo.key] = !isCollapsed[projectsByRepo.key]">
+    <span class="text-inverse"
+          [ngClass]="{ 'icon-arrows-down': !isCollapsed[projectsByRepo.key], 'icon-arrows-up': isCollapsed[projectsByRepo.key] }"></span>
+    {{projectsByRepo.key}}
+    <!--project repos length badge -->
+    <span class="badge badge-default badge-pill float-right">{{projectsByRepo.value.length}}</span>
+
+  </div>
+
+  <!-- project repos list -->
+  <div id="collapse_{{projectsByRepo.key}}" [ngbCollapse]="!isCollapsed[projectsByRepo.key]">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item list-group-item-action"
+          *ngFor="let project of projectsByRepo.value;">
+        <span class="mr-auto">{{project.repository.name}}</span>
+
+        <button *ngFor="let namespace of project.namespaces"
+                (click)="selectNamespace(namespace, project)"
+                ngbTooltip="{{namespace.name}}" container="body"
+                class="btn btn-xs btn-outline-info btn-rounded ml-2">
+          {{extractEnv(namespace.name)}}
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

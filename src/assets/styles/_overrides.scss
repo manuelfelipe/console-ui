@@ -1,0 +1,62 @@
+@import './variables';
+
+a:focus,
+a:hover {
+  text-decoration: none !important;
+}
+
+.btn-link:not([disabled]):focus,
+.btn-link:not([disabled]):hover {
+  color: $YP_BLUE !important;
+  text-decoration: none !important;
+}
+
+.btn-primary.active {
+  background-color: $YP_BLUE !important;
+  border-color: $YP_BLUE !important;
+}
+
+.breadcrumb {
+  background-color: $YP_LIGHT !important;
+  font-weight: 100;
+}
+
+.dropdown-item {
+  font-weight: 100;
+}
+
+.card-header {
+  font-weight: 100;
+}
+
+.card-outline-success .card-header {
+  background-color: transparentize($YP_GREEN, 0.9);
+  border-bottom-color: $YP_GREEN;
+  color: $YP_GREEN;
+}
+
+.card-outline-danger .card-header {
+  background-color: transparentize($YP_RED, 0.9);
+  border-bottom-color: $YP_RED;
+  color: $YP_RED;
+}
+
+.card-outline-warning {
+  border-color: $YP_YELLOW_DARK !important;
+
+  .badge-warning {
+    background-color: $YP_YELLOW_DARK;
+  }
+
+  .card-header {
+    background-color: transparentize($YP_YELLOW_DARK, 0.9);
+    border-bottom-color: $YP_YELLOW_DARK;
+    color: $YP_YELLOW_DARK;
+  }
+}
+
+textarea,
+.input-group-addon,
+.form-control {
+  font-weight: 100 !important;
+}
